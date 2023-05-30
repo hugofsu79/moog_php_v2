@@ -13,6 +13,7 @@ include 'head.php';
     ?>
 
     <main>
+        <h1>produit</h1>
     <?php
     ?>
     </main>

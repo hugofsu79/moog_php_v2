@@ -13,6 +13,7 @@ include 'head.php';
     ?>
 
     <main>
+        <h1>panier</h1>
     <?php
     ?>
     </main>

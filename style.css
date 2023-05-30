@@ -1,0 +1,34 @@
+/* font 
+font-family: "stinger-variable", sans-serif;
+font-variation-settings: "wdth" 100, "wght" 700;*/
+
+
+body {
+    background-color: black;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif white;
+}
+
+video {
+    padding-top: 1em;
+    border-radius: 2em;
+}
+
+main img{
+    border-radius: 1em;
+    margin: .2em;
+}
+
+h1 {
+
+    font-family: "stinger-variable", sans-serif;
+    text-transform: uppercase;
+    color: white;
+    font-variation-settings: "wdth" 100, "wght" 700;
+    margin: 1em;
+}
+/* 
+img {
+    border-radius: .5em;
+    margin: 1em;
+} */
+
