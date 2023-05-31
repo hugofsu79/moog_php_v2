@@ -14,7 +14,11 @@
     ?>
     <main>
 
-    <div class="container-fluid">
+
+  <h1 id="les_produits">Les produits</h1>
+
+  
+    <div class="container-fluid ">
     <div class="row">
         <?php
         
@@ -27,11 +31,18 @@
         foreach ($articles as $article) {
 
             echo "<div class=\"card col-md-4\">
-  <img src=\"./Rscs/png/img/" . $article['picture'] . "\" \class=\"card-img-top\" alt=\"...\">
+  <img src=\"./Rscs/png/" . $article['picture'] . "\" \class=\"card-img-top\" alt=\"...\">
   <div class=\"card-body\">
     <h5 class=\"card-title\">" . $article['name'] . "</h5>
     <p class=\"card-text\">" . $article['description'] . "</p>
-    <a href=\"#\" class=\"btn btn-dark\">Ajouter à mon panier</a>
+
+
+    <form method=\"GET\" action=\"./produit.php\">
+
+    <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
+
+    <input type=\"submit\" class=\"btn btn-dark\" value=\"Détails produit\">
+    </form>
   </div>
 </div>";
         }

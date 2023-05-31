@@ -13,7 +13,7 @@ video {
     border-radius: 2em;
 }
 
-main img{
+main img {
     border-radius: 1em;
     margin: .2em;
 }
@@ -26,9 +26,9 @@ h1 {
     font-variation-settings: "wdth" 100, "wght" 700;
     margin: 1em;
 }
+
 /* 
 img {
     border-radius: .5em;
     margin: 1em;
 } */
-
