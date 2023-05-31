@@ -66,9 +66,9 @@
         ?>
     </main>
 
-    <?php
-    addToCart($product);
-    ?>
-    <?php
-    include 'footer.php';
-    ?>
+    <!-- <?php
+          addToCart($product);
+          ?> -->
+<?php
+include 'footer.php';
+?>

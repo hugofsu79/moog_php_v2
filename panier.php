@@ -13,31 +13,33 @@
     ?>
 
     <!-- <?php
-    include 'header.php';
-    ?> -->
+            include 'header.php';
+            ?> -->
 
     <main>
         <h1>panier</h1>
         <?php
-        //1) Récupérer l'id transmis par le formulaire
-        $productId = $_GET['productId'];
-        // var_dump($productId); // Je teste la variable
 
-        //2) Récuperer le produit qui correspond à cet id, il ira récupérer l'ensemble du produit souhaité
-        $article = getArticleFromId($productId);
-        //var_dump($article)
-       // ajouter l'article au panier et tester l'article
-       
-        addToCart($article);
+        // Si je viens d'un bouton d'ajout, je déclenche l'ajout 
+        if (isset($_GET['productId'])) {
 
-        var_dump($_SESSION);
 
+            //1) Récupérer l'id transmis par le formulaire
+            $productId = $_GET['productId'];
+            // var_dump($productId); // Je teste la variable
+
+            //2) Récuperer le produit qui correspond à cet id, il ira récupérer l'ensemble du produit souhaité
+            $article = getArticleFromId($productId);
+            //var_dump($article)
+            // ajouter l'article au panier et tester l'article
+
+            addToCart($article);
+
+            var_dump($_SESSION);
+        }
         ?>
     </main>
 
     <?php
     include 'footer.php';
     ?>
-
-
-    

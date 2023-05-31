@@ -32,7 +32,6 @@
         ?>
 
         <h1><?= $article['name'] ?></h1>
-
         <div class="card mb-3 text-center">
             <img src="./Rscs/png/<?= $article['picture'] ?>" class="card-img-top w-50 mx-auto" alt="...">
             <div class="card-body">

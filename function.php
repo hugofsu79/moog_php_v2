@@ -34,10 +34,28 @@ function getArticles()
             'detailedDescription' => 'Matriarch est un synthétiseur analogique axé sur l\'imagination. Le summum de la famille semi-modulaire de synthétiseurs de Moog, l\'architecture patchable de Matriarch et les circuits Moog vintage offrent une exploration ouverte aux possibilités sonores infinies et à un son analogique inégalé.',
             'picture' => 'matriarch_dark.jpeg'
         ],
-        // 3ème article
+        // 4ème article
         [
             'name' => 'Model 10',
             'id' => 4,
+            'price' => 13999.00,
+            'description' => 'Il permet de créer et contrôler entièrement le son à partir de zéro.',
+            'detailedDescription' => 'La nouvelle machine pourrait décomposer les éléments fondamentaux du son, offrant à l\'opérateur la capacité de contrôler chaque aspect de sa sortie - essentiellement construire le son à partir de zéro.',
+            'picture' => 'model_10_black-1.jpeg'
+        ],
+        // 5ème article        
+        [
+            'name' => 'Mother-32',
+            'id' => 5,
+            'price' => 703.00,
+            'description' => 'Il permet de créer et contrôler entièrement le son à partir de zéro.',
+            'detailedDescription' => 'La nouvelle machine pourrait décomposer les éléments fondamentaux du son, offrant à l\'opérateur la capacité de contrôler chaque aspect de sa sortie - essentiellement construire le son à partir de zéro.',
+            'picture' => 'model_10_black-1.jpeg'
+        ],
+        // 6ème article       
+        [
+            'name' => 'Model 10',
+            'id' => 6,
             'price' => 13999.00,
             'description' => 'Il permet de créer et contrôler entièrement le son à partir de zéro.',
             'detailedDescription' => 'La nouvelle machine pourrait décomposer les éléments fondamentaux du son, offrant à l\'opérateur la capacité de contrôler chaque aspect de sa sortie - essentiellement construire le son à partir de zéro.',
@@ -72,6 +90,30 @@ function createCart()
     }
 }
 
-function addToCart($article){
+function addToCart($article)
+{
+
+    //on attribue une quantité de 1 (par défaut) à l'article 
+    $article['quantite'] = 1;
+    //$i = index de la boucle
+    //$i< count ($_SESSION['panier']) = condition de maintien de a boucle (évaluée AVANT chaque tour)
+    //(Si condition vraie => on lance la boucle)
+    //je vérifie si l'article n'est pasdéjà présent
+    for ($i = 0; $i < count($_SESSION['panier']); $i++) {
+
+        // si présent => quantité +1
+        if ($_SESSION['panier'][$i]['id'] == $article['id']){
+
+            // $articlePanier['quantite'] = $articlePanier['quantite'] + 1; //pire technique niveau opti
+            // $articlePanier['quantite'] += 1; //meilleure méthode mais peut mieux faire
+            $_SESSION['panier'][$i]['quantite']++;
+            
+            return; // permet de sortir de la fonction
+        }
+    }
+
+    //si pas présent =>  ajout classique via array_push
+
+
     array_push($_SESSION['panier'], $article);
 }

@@ -6,7 +6,9 @@ session_start();
 
 //J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
 include 'head.php';
+createCart()
 ?>
+
 
     <?php
     include 'header.php';
