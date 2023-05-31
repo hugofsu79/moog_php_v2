@@ -54,11 +54,24 @@ function getArticleFromId($id)
     // Récuperer la liste des articles
     $articles = getArticles();
 
-    // Aller cercher dedans l'article qui comporte l'id en paramètre
+    // Aller chercher dedans l'article qui comporte l'id en paramètre
     foreach ($articles as $article) {
         if ($article['id'] == $id) {
             // Le renvoyer avec return
             return $article;
         }
     }
+}
+
+// *************** Initialiser le panier *************** //
+
+function createCart()
+{
+    if (isset($_SESSION['panier']) == false) {
+        $_SESSION['panier'] = [];
+    }
+}
+
+function addToCart($article){
+    array_push($_SESSION['panier'], $article);
 }

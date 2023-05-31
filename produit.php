@@ -8,13 +8,17 @@
 
     session_start();
 
+    // Pour initialiser le panier 
+    createCart();
+
+
     //J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
     include 'head.php';
     ?>
 
 
     <main>
-        
+
         <?php
         //1) Récupérer l'id transmis par le formulaire
         $productId = $_GET['productId'];
@@ -27,15 +31,15 @@
         //3) afficher ses infos
         ?>
 
-<h1><?= $article['name']?></h1>
+        <h1><?= $article['name'] ?></h1>
 
         <div class="card mb-3 text-center">
-            <img src="./Rscs/png/<?= $article['picture']?>" class="card-img-top w-50 mx-auto" alt="...">
+            <img src="./Rscs/png/<?= $article['picture'] ?>" class="card-img-top w-50 mx-auto" alt="...">
             <div class="card-body">
-                <h5 class="card-title"><?= $article['name']?></h5>
-                <h5 class="card-title"><?= $article['price']?> €</h5>
-                <p class="card-text"><?= $article['description']?></p>
-                <p class="card-text"><small class="text-body-secondary"><?= $article['detailedDescription']?></small></p>
+                <h5 class="card-title"><?= $article['name'] ?></h5>
+                <h5 class="card-title"><?= $article['price'] ?> €</h5>
+                <p class="card-text"><?= $article['description'] ?></p>
+                <p class="card-text"><small class="text-body-secondary"><?= $article['detailedDescription'] ?></small></p>
             </div>
         </div>
     </main>
