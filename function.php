@@ -48,18 +48,18 @@ function getArticles()
             'name' => 'Mother-32',
             'id' => 5,
             'price' => 703.00,
-            'description' => 'Il permet de créer et contrôler entièrement le son à partir de zéro.',
-            'detailedDescription' => 'La nouvelle machine pourrait décomposer les éléments fondamentaux du son, offrant à l\'opérateur la capacité de contrôler chaque aspect de sa sortie - essentiellement construire le son à partir de zéro.',
-            'picture' => 'model_10_black-1.jpeg'
+            'description' => 'Son moteur sonore est basé sur la synthèse soustractive.',
+            'detailedDescription' => 'Le synthétiseur Moog Mother-32 est sorti en 2015. Il s\'agit d\'un synthétiseur analogique monophonique. Le Mother-32 possède 1 oscillateur, 1 enveloppe, 1 lfo.',
+            'picture' => 'moog-mother-32_2.jpeg'
         ],
         // 6ème article       
         [
-            'name' => 'Model 10',
+            'name' => 'Moog One',
             'id' => 6,
-            'price' => 13999.00,
-            'description' => 'Il permet de créer et contrôler entièrement le son à partir de zéro.',
-            'detailedDescription' => 'La nouvelle machine pourrait décomposer les éléments fondamentaux du son, offrant à l\'opérateur la capacité de contrôler chaque aspect de sa sortie - essentiellement construire le son à partir de zéro.',
-            'picture' => 'model_10_black-1.jpeg'
+            'price' => 10899.00,
+            'description' => 'l\'ultime synthétiseur Moog, tri-timbral, polyphonique et analogique, source infinie d\'inspiration sonore.',
+            'detailedDescription' => 'Moog One est l\'ultime synthétiseur Moog - un synthétiseur analogique, tri-timbral et polyphonique, conçu pour inspirer l\'imagination, stimuler la créativité et ouvrir des portails vers de vastes nouveaux univers de possibilités sonores',
+            'picture' => 'moogone.jpeg'
         ],
     ];
 }
