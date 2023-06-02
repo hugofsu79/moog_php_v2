@@ -184,13 +184,19 @@ function viderPanier()
 {
     $_SESSION['panier'] = [];   
 }
-function panierVide()
+// function panierVide()
 
-        // Si la poubelle est vide
+//         // Si la poubelle est vide
+// {
+//   if ($_SESSION['panier'] = []){
+
+
+//     return;
+//   }
+// }
+
+function calculerFraisPort()
+
 {
-  if ($_SESSION['panier'] = []){
-
-
-    return;
-  }
+    $_SESSION ['resultat'] +3;
 }

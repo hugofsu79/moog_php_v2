@@ -23,6 +23,7 @@ include 'head.php';
 ?>
 
 
+
 <main>
 
 
@@ -57,13 +58,17 @@ include 'head.php';
     if (isset($_POST['viderpanier'])) {
         viderPanier();
     }
-    if (isset($_POST['paniervide'])) {
-        panierVide();
-    }
+
     if (count($_SESSION['panier']) > 0) {
     }
-    ?>
 
+
+    if(count($_SESSION['fraisdeport'])) {
+
+    }
+
+    ?>
+    
 </main>
 
 <section class="h-100 h-custom">
@@ -126,19 +131,25 @@ include 'head.php';
             </div>
             <?php if (count($_SESSION['panier'])) ?>
 
-        <form method="POST" action="./panier.php">
-            <button type="submit" class="btn btn-outline-danger name="viderPanier">Vider le panier</button>
-        </form>
+            <form method="POST" action="./panier.php">
+                <button type="submit" class="btn btn-outline-danger" name="viderPanier">Vider le panier</button>
+            </form>
             <a href="./validation.php">
                 <button class="btn btn-outline-danger>
-    Valider la commande</button>
-    </a>
+                Valider la commande</button>
+            </a>
 
-            <form class=" rounded float-end" action="panier.php" method="post" style="width: 80px;">
-                    <button type="submit" name="paniervide" class="btn btn-outline-danger btn-block btn-lg">&#128465;
+            <form class="rounded float-end" action="panier.php" method="post" style="width: 80px;">
+                    <button type="submit" name="panierVide" class="btn btn-outline-danger btn-block btn-lg">&#128465;
                     </button>
-                    </form>
+            </form>
+            <p>frais de port = </p>
 
+
+            <div class="d-flex justify-content-between mb-4">
+                                            <p class="mb-2">Frais de livraison</p>
+                                            <p class="mb-2"></p>
+                                        </div>
         </div>
 </section>
 
