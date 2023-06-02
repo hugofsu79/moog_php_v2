@@ -13,16 +13,24 @@
       ?>
 
 <body>
+
+
     <?php
     include 'header.php';
 
     // Pour initialiser le panier 
-    createCart();
-    var_dump($_SESSION);
+    // createCart();
+    // var_dump($_SESSION);
 
 
     ?>
 
+
+<div class="container text-center">
+  <div class="row">
+      <video autoplay loop width="800" src="./Rscs/video/factory-margincrop.mp4"></video>
+    </div>
+  </div>
     
     <main>
 
@@ -34,7 +42,7 @@
     <div class="container-fluid ">
     <div class="row">
         <?php
-
+        
 
         $articles = getArticles();
 
@@ -66,9 +74,7 @@
         ?>
     </main>
 
-    <!-- <?php
-          addToCart($product);
-          ?> -->
+
 <?php
 include 'footer.php';
 ?>

@@ -15,7 +15,13 @@
     //J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
     include 'head.php';
     ?>
+    <?php
+    include 'header.php';
 
+    // Pour initialiser le panier 
+    // createCart();
+    // var_dump($_SESSION);
+    ?>
 
     <main>
 
@@ -33,7 +39,7 @@
 
         <h1><?= $article['name'] ?></h1>
         <div class="card mb-3 text-center">
-            <img src="./Rscs/png/<?= $article['picture'] ?>" class="card-img-top w-50 mx-auto" alt="...">
+            <img src="./Rscs/png/"><?= $article['picture'] ?>" class="card-img-top w-50 mx-auto" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><?= $article['name'] ?></h5>
                 <h5 class="card-title"><?= $article['price'] ?> €</h5>

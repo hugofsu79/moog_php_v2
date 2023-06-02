@@ -11,5 +11,6 @@
     <link rel="stylesheet" href="./style.css">
     <!-- font -->
     <link rel="stylesheet" href="https://use.typekit.net/coh0zsl.css">
+    <link rel="icon" type="image/png" href="./Rscs/png/favicon.png" />
 </head>
 

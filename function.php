@@ -94,7 +94,6 @@ function addToCart($article)
 {
 
     //on attribue une quantité de 1 (par défaut) à l'article 
-    $article['quantite'] = 1;
     //$i = index de la boucle
     //$i< count ($_SESSION['panier']) = condition de maintien de a boucle (évaluée AVANT chaque tour)
     //(Si condition vraie => on lance la boucle)
@@ -102,18 +101,96 @@ function addToCart($article)
     for ($i = 0; $i < count($_SESSION['panier']); $i++) {
 
         // si présent => quantité +1
-        if ($_SESSION['panier'][$i]['id'] == $article['id']){
+        if ($_SESSION['panier'][$i]['id'] == $article['id']) {
 
             // $articlePanier['quantite'] = $articlePanier['quantite'] + 1; //pire technique niveau opti
             // $articlePanier['quantite'] += 1; //meilleure méthode mais peut mieux faire
             $_SESSION['panier'][$i]['quantite']++;
-            
+
             return; // permet de sortir de la fonction
         }
     }
 
-    //si pas présent =>  ajout classique via array_push
+    $article['quantite']=1;
+    array_push($_SESSION ['panier'],$article);
+}
+//si pas présent =>  ajout classique via array_push
 
 
-    array_push($_SESSION['panier'], $article);
+//MODIFIER LA QUANTITE DU PANIER
+
+
+
+// function montantGlobal(){
+// $liste = get_allproduits();
+//    $total=0;
+//    foreach ($liste as $produit);
+//    {
+//       $total += $produit['prix'] * $produit['qt'];
+//    }
+//    return $total;
+// }
+
+function updateQuantity()
+{
+    // Je boucle sur le panier => je cherche l'article à modifier
+    for ($i = 0; $i < count($_SESSION['pannier']); $i++) {
+
+        // dès que je trouve mon article
+        if ($_SESSION['panier'][$i]['id'] == $_POST['modifiedArticleId']) {
+
+            // Je remplace son ancienne quantité par la nouvelle
+            $_SESSION['panier']['$i']['quantity'] = $_POST['newQuantity'];
+
+            // J'affiche un message de succès dans une petite fenêtre via JavaScript
+            echo "<script> alert(\"Quantité modifiée\"); </script>";
+
+            // Je sort de la fonction pour éviter de  boucler
+            return;
+        }
+    }
+}
+
+
+function totalArticles()
+{
+    $total = 0;
+
+    foreach ($_SESSION['panier'] as $article) {
+        $total += $article['quantite'] * $article['price'];
+    }
+    return $total;
+}
+
+
+function deleteArticle()
+{
+    for ($i = 0; $i < count($_SESSION['panier']); $i++) {
+
+        // dès que je trouve mon article
+        if ($_SESSION['panier'][$i]['id'] == $_POST['deleArticleId']) {
+
+            array_splice($_SESSION['panier'], $i, 1);
+            
+            // Je sort de la fonction pour éviter de  boucler
+            return;
+        }
+    }
+}
+
+
+function viderPanier()
+
+{
+    $_SESSION['panier'] = [];   
+}
+function panierVide()
+
+        // Si la poubelle est vide
+{
+  if ($_SESSION['panier'] = []){
+
+
+    return;
+  }
 }

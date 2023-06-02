@@ -14,9 +14,3 @@
     </div>
   </div>
 </nav>
-
-<div class="container text-center">
-  <div class="row">
-      <video autoplay loop width="800" src="./Rscs/video/factory-margincrop.mp4"></video>
-    </div>
-  </div>
