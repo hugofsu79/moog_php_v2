@@ -23,28 +23,25 @@
     // var_dump($_SESSION);
     ?>
 
-    <main>
+    <main class="pb-5">
+        <div class="container text-center bg-white">
+            <?php
+            //1) Récupérer l'id transmis par le formulaire
+            $productId = $_GET['productId'];
+            // var_dump($productId); // Je teste la variable
 
-        <?php
-        //1) Récupérer l'id transmis par le formulaire
-        $productId = $_GET['productId'];
-        // var_dump($productId); // Je teste la variable
+            //2) Récuperer le produit qui correspond à cet id, il ira récupérer l'ensemble du produit souhaité
+            $article = getArticleFromId($productId);
+            // var_dump($article); // Je test que le produit s'affiche belle et bien 
 
-        //2) Récuperer le produit qui correspond à cet id, il ira récupérer l'ensemble du produit souhaité
-        $article = getArticleFromId($productId);
-        // var_dump($article); // Je test que le produit s'affiche belle et bien 
-
-        //3) afficher ses infos
-        ?>
-
-        <h1><?= $article['name'] ?></h1>
-        <div class="card mb-3 text-center">
-            <img src="./Rscs/png/"><?= $article['picture'] ?>" class="card-img-top w-50 mx-auto" alt="...">
+            //3) afficher ses infos
+            ?>
+            <h1 class="card-title p-3"><?= $article['name'] ?></h1>
+            <img src=" ./Rscs/png/<?= $article['picture'] ?>" class=" img-fluid rounded" alt="Shopping item" style="margin-bottom: 2em" ;>
             <div class="card-body">
-                <h5 class="card-title"><?= $article['name'] ?></h5>
-                <h5 class="card-title"><?= $article['price'] ?> €</h5>
-                <p class="card-text"><?= $article['description'] ?></p>
-                <p class="card-text"><small class="text-body-secondary"><?= $article['detailedDescription'] ?></small></p>
+                <h5 class="card-title pb-4"><?= $article['price'] ?> €</h5>
+                <p class="card-text pb-4"><?= $article['description'] ?></p>
+                <p class="card-text pb-3"><small class="text-body-secondary"><?= $article['detailedDescription'] ?></small></p>
             </div>
         </div>
     </main>

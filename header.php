@@ -9,7 +9,6 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="./panier.php">Panier</a>
-        <a class="nav-link active" aria-current="page" href="./produit.php">Détails produit</a>
       </div>
     </div>
   </div>

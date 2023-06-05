@@ -48,7 +48,7 @@ function getArticles()
             'name' => 'Mother-32',
             'id' => 5,
             'price' => 703.00,
-            'description' => 'Son moteur sonore est basé sur la synthèse soustractive.',
+            'description' => 'Son moteur sonore est basé sur la synthèse.',
             'detailedDescription' => 'Le synthétiseur Moog Mother-32 est sorti en 2015. Il s\'agit d\'un synthétiseur analogique monophonique. Le Mother-32 possède 1 oscillateur, 1 enveloppe, 1 lfo.',
             'picture' => 'moog-mother-32_2.jpeg'
         ],
@@ -57,7 +57,7 @@ function getArticles()
             'name' => 'Moog One',
             'id' => 6,
             'price' => 10899.00,
-            'description' => 'l\'ultime synthétiseur Moog, tri-timbral, polyphonique et analogique, source infinie d\'inspiration sonore.',
+            'description' => 'l\'ultime synthétiseur Moog, tri-timbral, polyphonique.',
             'detailedDescription' => 'Moog One est l\'ultime synthétiseur Moog - un synthétiseur analogique, tri-timbral et polyphonique, conçu pour inspirer l\'imagination, stimuler la créativité et ouvrir des portails vers de vastes nouveaux univers de possibilités sonores',
             'picture' => 'moogone.jpeg'
         ],
@@ -111,8 +111,8 @@ function addToCart($article)
         }
     }
 
-    $article['quantite']=1;
-    array_push($_SESSION ['panier'],$article);
+    $article['quantite'] = 1;
+    array_push($_SESSION['panier'], $article);
 }
 //si pas présent =>  ajout classique via array_push
 
@@ -151,6 +151,38 @@ function updateQuantity()
     }
 }
 
+function deleteArticle()
+{
+    for ($i = 0; $i < count($_SESSION['panier']); $i++) {
+
+        // dès que je trouve mon article
+        if ($_SESSION['panier'][$i]['id'] == $_POST['deleArticleId']) {
+
+            array_splice($_SESSION['panier'], $i, 1);
+
+            // Je sort de la fonction pour éviter de  boucler
+            return;
+        }
+    }
+}
+
+
+function viderPanier()
+
+{
+    $_SESSION['panier'] = [];
+}
+
+function fraisDeLivraison()
+{
+    $frais = 0; // Montant des frais de livraison
+    foreach ($_SESSION['panier'] as $article) {
+        $frais += $article['quantite'] * 3;
+    }
+    return $frais;
+}
+
+
 
 function totalArticles()
 {
@@ -163,40 +195,10 @@ function totalArticles()
 }
 
 
-function deleteArticle()
-{
-    for ($i = 0; $i < count($_SESSION['panier']); $i++) {
-
-        // dès que je trouve mon article
-        if ($_SESSION['panier'][$i]['id'] == $_POST['deleArticleId']) {
-
-            array_splice($_SESSION['panier'], $i, 1);
-            
-            // Je sort de la fonction pour éviter de  boucler
-            return;
-        }
-    }
-}
-
-
-function viderPanier()
+function retourAlaccueil()
 
 {
-    $_SESSION['panier'] = [];   
-}
-// function panierVide()
-
-//         // Si la poubelle est vide
-// {
-//   if ($_SESSION['panier'] = []){
-
-
-//     return;
-//   }
-// }
-
-function calculerFraisPort()
-
-{
-    $_SESSION ['resultat'] +3;
+    $_SESSION['panier'] = [];
+    header('Location: index.php');
+    exit;
 }

@@ -27,6 +27,10 @@ h1 {
     margin: 1em;
 }
 
+span {
+    width: 2em;
+}
+
 /* 
 img {
     border-radius: .5em;

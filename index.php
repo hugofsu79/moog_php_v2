@@ -28,21 +28,20 @@
 
 <div class="container text-center">
   <div class="row">
-      <video autoplay loop width="800" src="./Rscs/video/factory-margincrop.mp4"></video>
+      <img src="./Rscs/png/mur_sonore.png" class="rounded-1 pt-4"></img>
     </div>
-  </div>
     
-    <main>
+    <main class="p-2">
 
 
 
   <h1 id="les_produits">Les produits</h1>
 
 
-    <div class="container-fluid ">
-    <div class="row">
+    <div class="container-fluid">
+    <div class="row column">
         <?php
-        
+
 
         $articles = getArticles();
 
@@ -51,23 +50,26 @@
         // Je lance ma blouce pour afficher une carte bootstrap par article
         foreach ($articles as $article) {
 
-          echo "<div class=\"card col-md-4\">
-  <img src=\"./Rscs/png/" . $article['picture'] . "\" \class=\"card-img-top\" alt=\"...\">
-  <div class=\"card-body\">
-    <h5 class=\"card-title\">" . $article['name'] . "</h5>
-    <p class=\"card-text\">" . $article['description'] . "</p>
+          echo "<div class=\"col-md-4 p-2\"><div class=\"card\">
+        <img src=\"./Rscs/png/" . $article['picture'] . "\" \class=\"card-img-top\" alt=\"...\">
+        <div class=\"card-body\">
+        <h5 class=\"card-title\">" . $article['name'] . "</h5>
+        <p class=\"card-text\">" . $article['description'] . "</p>
 
 
-    <form method=\"GET\" action=\"./produit.php\">
+          <form method=\"GET\" action=\"./produit.php\">
     
-    <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-    <input type=\"submit\" class=\"btn btn-dark\" value=\"Détails produit\">
-    </form>
+         <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
+        <input type=\"submit\" class=\"btn btn-dark\" value=\"Détails produit\">
+         </form>
 
-    <form method=\"GET\" action=\"./panier.php\">
-    <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-    <input type=\"submit\" class=\"btn btn-outline-danger\" value=\"Ajouter au panier\">
-    </form></div>
+           <form method=\"GET\" action=\"./panier.php\">
+         <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
+         <input type=\"submit\" class=\"btn btn-outline-danger\" value=\"Ajouter au panier\">
+        </form>
+        </div>
+        </div>
+        
 </div>";
         }
 
