@@ -42,6 +42,8 @@
                 <h5 class="card-title pb-4"><?= $article['price'] ?> €</h5>
                 <p class="card-text pb-4"><?= $article['description'] ?></p>
                 <p class="card-text pb-3"><small class="text-body-secondary"><?= $article['detailedDescription'] ?></small></p>
+
+                <input type=\"submit\" class=\"btn btn-outline-danger\" value=\"Ajouter au panier\">
             </div>
         </div>
     </main>

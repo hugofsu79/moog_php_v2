@@ -57,11 +57,11 @@ include 'head.php';
         viderPanier();
     }
 
-    if (count($_SESSION['panier']) > 0) {
-    }
+    // if (count($_SESSION['panier']) > 0) {
+    // }
 
-    if (isset($_SESSION['totalArticles'])) {
-    }
+    // if (isset($_SESSION['totalArticles'])) {
+    // }
 
     if (isset($_POST['retourAlaccueil'])) {
         retourAlaccueil();
@@ -131,6 +131,8 @@ include 'head.php';
         </div>
     </div>
 </div>
+
+
 <!-- prix&validation commande -->
 <div class="container text-center pt-5">
     <div class="text-center">
@@ -166,7 +168,7 @@ include 'head.php';
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-danger" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" style="margin: 1rem;">Valider la commande</button>
+                    <button class="btn btn-danger" data-bs-target="#exampleModalToggle" href="./validation.php" data-bs-toggle="modal" style="margin: 1rem;">Valider la commande</button>
                 </div>
             </div>
             <div class="col">

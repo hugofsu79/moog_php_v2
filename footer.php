@@ -57,15 +57,13 @@
             <!-- Section: Form -->
 
             <!-- Section: Text -->
-            <section class="mb-2">
+            <section class="mb-1">
                 <p style="color: white;">
                     Plongez dans l'univers captivant des synthétiseurs et ressentez la passion inextinguible qui animait l'âme de Robert Moog, tout comme elle animera vos compositions musicales, grâce à la magie des sons que vous pouvez créer.
                 </p>
             </section>
         </div>
     </section>
-    <!-- Grid container -->
-
     <!-- Copyright -->
     <div class="text-center p-3 white" style="color: white;">
         © 2020 Copyright:
