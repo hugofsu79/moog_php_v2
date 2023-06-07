@@ -51,9 +51,9 @@
         foreach ($articles as $article) {
 
           echo "<div class=\"col-md-4 p-2\"><div class=\"card\">
-        <img src=\"./Rscs/png/" . $article['picture'] . "\" \class=\"card-img-top\" alt=\"...\">
+        <img src=\"./Rscs/png/" . $article['image'] . "\">
         <div class=\"card-body\">
-        <h5 class=\"card-title\">" . $article['name'] . "</h5>
+        <h5 class=\"card-title\">" . $article['nom'] . "</h5>
         <p class=\"card-text\">" . $article['description'] . "</p>
 
 
