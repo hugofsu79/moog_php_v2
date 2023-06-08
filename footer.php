@@ -67,7 +67,7 @@
     <!-- Copyright -->
     <div class="text-center p-3 white" style="color: white;">
         © 2020 Copyright:
-        <a class="text-white" href="https://www.moogmusic.com/">moog.com</a>
+        <a class="text-white" href="https://www.moogmusic.com/" target="_blank">moog.com</a>
     </div>
     <!-- Copyright -->
 </footer>

@@ -8,7 +8,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="./panier.php">Panier</a>
+        <div class="container overflow-hidden text-center">
+          <div class="row gx-5">
+            <div class="col-md-2">
+              <a class="nav-link active" aria-current="panier" href="./panier.php">Panier</a>
+            </div>
+            <div class="col-md-2">
+              <a class="nav-link active" aria-current="inscriptionconnexion" href="./gammes.php">Gammes</a>
+            </div>
+            <div class="col-md-8">
+              <a class="nav-link active" aria-current="inscriptionconnexion" href="./inscription.php">Connexion ou Inscription</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

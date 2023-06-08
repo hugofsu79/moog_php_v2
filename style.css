@@ -27,6 +27,9 @@ h1 {
     margin: 1em;
 }
 
+label{
+    color:white;
+}
 span {
     width: 2em;
 }

@@ -88,10 +88,10 @@ include 'head.php';
                             <div class="col">
                                 <div class="row position-relative start-50 translate-middle-x ">
                                     <div class="col-md-4">
-                                        <img src="./Rscs/png/<?= $article['picture'] ?>" class=" img-fluid rounded" alt="Shopping item" style="margin-bottom: 2em" ;>
+                                        <img src="./Rscs/png/<?= $article['image'] ?>" class=" img-fluid rounded" alt="Shopping item" style="margin-bottom: 2em" ;>
                                     </div>
                                     <div class="col">
-                                        <p class="card-text"><?= $article['name'] ?></p>
+                                        <p class="card-text"><?= $article['nom'] ?></p>
                                     </div>
                                     <div class="col">
                                         <p class="card-text"><?= $article['description'] ?></p>
@@ -118,7 +118,7 @@ include 'head.php';
                                         </div>
                                         <!-- prix -->
                                         <div style="width: 200px;">
-                                            <h5 class="card-title"><?= $article['price'] ?> €</h5>
+                                            <h5 class="card-title"><?= $article['prix'] ?> €</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -172,7 +172,7 @@ include 'head.php';
             </div>
             <div class="col">
                 <form method="POST" action="./panier.php">
-                    <button type="submit" class="btn btn-xl btn-outline-danger" name="viderPanier"><span>&#128465;</span></button>
+                    <button type="submit" class="btn btn-xl btn-outline-danger" name="viderPanier"><span>Supprimer &#128465;</span></button>
                 </form>
             </div>
         </div>

@@ -36,14 +36,13 @@
 
             //3) afficher ses infos
             ?>
-            <h1 class="card-title p-3"><?= $article['name'] ?></h1>
-            <img src=" ./Rscs/png/<?= $article['picture'] ?>" class=" img-fluid rounded" alt="Shopping item" style="margin-bottom: 2em" ;>
+            <h1 class="card-title p-3"><?= $article['nom'] ?></h1>
+            <img src=" ./Rscs/png/<?= $article['image'] ?>" class=" img-fluid rounded" alt="Shopping item" style="margin-bottom: 2em";>
             <div class="card-body">
-                <h5 class="card-title pb-4"><?= $article['price'] ?> €</h5>
+                <h5 class="card-title pb-4"><?= $article['prix'] ?> €</h5>
                 <p class="card-text pb-4"><?= $article['description'] ?></p>
-                <p class="card-text pb-3"><small class="text-body-secondary"><?= $article['detailedDescription'] ?></small></p>
-
-                <input type=\"submit\" class=\"btn btn-outline-danger\" value=\"Ajouter au panier\">
+                <p class="card-text pb-3"><small class="text-body-secondary"><?= $article['description_detaillee'] ?></small></p>
+                <input type="submit" class="btn btn-outline-danger mb-5" value="Ajouter au panier">
             </div>
         </div>
     </main>

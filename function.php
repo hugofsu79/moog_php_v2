@@ -18,7 +18,7 @@ function getConnection()
     // Je retourne la connexion stockée dans une variable
     return $db;
 }
-// ***************Renvoyer un tableau d'articles*************** //
+// *************** Renvoyer un tableau d'articles ***************
 
 function getArticles()
 {
@@ -32,7 +32,7 @@ function getArticles()
     return $results->fetchAll();
 }
 
-// *************** Recupérer un article à partir de son id *************** //
+// *************** Recupérer un article à partir de son id *************** 
 
 function getArticleFromId($id)
 {
@@ -41,7 +41,7 @@ function getArticleFromId($id)
     // /!\ JAMAIS DE VARIABLE PHP DIRECTEMENT DANS UNE REQUETTE /!\(RISQUE D'INJECTION SQL)
     // Je mets en place une requête pr&parée
 
-    $query = $db->prepare('SELECT * FROM Articles WHERE id = ? AND nom = ?'); //Je prépare ma requète 
+    $query = $db->prepare('SELECT * FROM Articles WHERE id = ?'); //Je prépare ma requète 
     $query->execute([$id]); // Je l'exécute avec le bon paramètre
     return $query->fetch(); // quand il y a 1 resultat possible il n'est pas obligé de faire un fetchAll, ainsi on a directemnt l'élément souhaité
 }
@@ -154,7 +154,7 @@ function totalArticles()
     $total = 0;
 
     foreach ($_SESSION['panier'] as $article) {
-        $total += $article['quantite'] * $article['price'];
+        $total += $article['quantite'] * $article['prix'];
     }
     return $total;
 }
@@ -166,4 +166,10 @@ function retourAlaccueil()
     $_SESSION['panier'] = [];
     header('Location: index.php');
     exit;
+}
+
+function getGammes()
+
+{
+    $db = getGammes();
 }
