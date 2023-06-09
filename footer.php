@@ -10,7 +10,7 @@
 
     <!-- font -->
     <link rel="stylesheet" href="https://use.typekit.net/coh0zsl.css">
-    <link rel="icon" type="image/png" href="./Rscs/png/favicon.png" />
+    <link rel="icon" type="image/png" href="./Rscs/png/favicon.png">
     <!-- css -->
     <link rel="stylesheet" href="./style.css">
 </head>

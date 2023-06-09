@@ -147,8 +147,6 @@ function fraisDeLivraison()
     return $frais;
 }
 
-
-
 function totalArticles()
 {
     $total = 0;
@@ -161,7 +159,6 @@ function totalArticles()
 
 
 function retourAlaccueil()
-
 {
     $_SESSION['panier'] = [];
     header('Location: index.php');
@@ -169,7 +166,23 @@ function retourAlaccueil()
 }
 
 function getGammes()
-
 {
-    $db = getGammes();
+    //synthétiseur modulaire 
+    //Synthétiseur semi-modulaire
+    //....\\\
+    $db = getConnection();
+    $results = $db->query('SELECT * FROM gammes');
+    return $results->fetchAll();
+}
+function getArticlesByGamme($id)
+{
+    //prepare/execute
+    $db = getConnection(); // Je me connect à la bdd
+
+    // /!\ JAMAIS DE VARIABLE PHP DIRECTEMENT DANS UNE REQUETTE /!\(RISQUE D'INJECTION SQL)
+    // Je mets en place une requête pr&parée
+
+    $query = $db->prepare('SELECT * FROM articles WHERE id_gamme = ?'); //Je prépare ma requète 
+    $query->execute([$id]); // Je l'exécute avec le bon paramètre
+    return $query->fetchAll(); // quand il y a 1 resultat possible il n'est pas obligé de faire un fetchAll, ainsi on a directemnt l'élément souhaité
 }

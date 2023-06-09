@@ -39,3 +39,14 @@ img {
     border-radius: .5em;
     margin: 1em;
 } */
+
+.h1_with_bg{
+background-image: url(./moog_php_v2/Rscs/png/bg_footer.png);
+}
+
+
+@include media-breakpoint-up(lg) {
+    .entrez_votre_nom {
+        margin: 2em;
+    }
+}
