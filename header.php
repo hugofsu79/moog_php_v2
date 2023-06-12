@@ -16,8 +16,11 @@
             <div class="col-md-2">
               <a class="nav-link active" aria-current="inscriptionconnexion" href="./gammes.php">Gammes</a>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-5">
               <a class="nav-link active" aria-current="inscriptionconnexion" href="./inscription.php">Connexion ou Inscription</a>
+            </div>
+            <div class="col-md-2">
+              <a class="nav-link active" aria-current="panier" href="./Boutique.php">Boutique</a>
             </div>
           </div>
         </div>

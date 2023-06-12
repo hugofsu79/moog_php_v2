@@ -16,9 +16,9 @@ include 'head.php';
     ?>
 <?php
 if (isset($_POST["mail"])) {
-    echo "Yes, mail is set";    
-} else {    
-    echo 
+    echo "Yes, mail is set";
+} else {
+    echo
     "<div class=\"col text-center pt-5 pb-5\">
     <h1 name=\"h1_with_bg\">Merci pour votre inscription 🦾</h1></div>
     <div class=\"text-center\">
@@ -26,16 +26,14 @@ if (isset($_POST["mail"])) {
         </div>
     </div>
     <div class=\"text-center\">
-    <a type=\"button\" class=\"btn btn-danger btn-lg mt-5 mb-5\" href=\"index.php?param=<?php?>\">Retour au menu</a> "
-    ;
-    
+    <a type=\"button\" class=\"btn btn-danger btn-lg mt-5 mb-5\" href=\"index.php?param=<?php?>\">Retour au menu</a> ";
 }
-?>
+
+
+?> 
 
 
 
  <?php
     include 'footer.php';
     ?>
-
-    

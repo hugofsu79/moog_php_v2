@@ -27,12 +27,9 @@
     $gammes = getGammes();
     //2
     foreach ($gammes as $gamme) {
-
-        echo
-        "<h1>" . $gamme['nom'] . "</h1>";// Les gammes s'affiches en en-tete, il est dans un echo dissoncié afin de ne pas avoir les gammes a chaque article.
-
-        "<div class=\"container\">
-        <div class=\"row\">";
+        echo "<h1>" . $gamme['nom'] . "</h1>";
+        echo "<div class=\"container\">
+                <div class=\"row\">";// Les gammes s'affiches en en-tete, il est dans un echo dissoncié afin de ne pas avoir les gammes a chaque article.
         
         foreach (getArticlesByGamme($gamme['id']) as $article) { 
 
@@ -53,13 +50,15 @@
                         <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
                         <input type=\"submit\" class=\"btn btn-outline-danger\" value=\"Ajouter au panier\">
                         </form>
-                </div>;
-            }        
-        </div>
-     }
-    ?>
+                </div></div></div>"; 
+            }       
+     }?>
 </body>
 
+
+<?php
+var_dump($_SESSION);
+?>
 
 
 <?php

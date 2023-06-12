@@ -44,7 +44,6 @@
                                          <label class="form-check-label" for="flexCheckDefault">
                                              Retenir le mot de passe
                                          </label>
-
                                      </div>
                                      <button type="button" class="btn btn-outline-danger mt-3">Connexion</button>
                                  </div>
@@ -91,15 +90,15 @@
                      </div>
                      <div class="col">
                          <label for=adresse>Adresse</label>
-                         <textarea id=adresse name="adresse" rows=1 required class="form-control" placeholder="Asheville"></textarea>
+                         <textarea id=adresse name="adresse" rows=1 required class="form-control" placeholder="Votre adresse"></textarea>
                      </div>
-                     <div class="col">
+                     <div class="col-md-3">
                          <label for=codepostal>Code postal</label>
-                         <input name="codepostal" type=text required class="form-control mb-5" placeholder="&#8230;">
+                         <input name="codepostal" type=text required class="form-control mb-5 text-center" placeholder="Code">
                      </div>
-                     <div class="col">
+                     <div class="col-md-4">
                          <label for=ville>Ville</label>
-                         <input name="ville" type=text required class="form-control mb-5" placeholder="Mot de passe">
+                         <input name="ville" type=text required class="form-control mb-5"  placeholder="Asheville">
                      </div>
                      <div>
                          <button class="col-md-4 btn btn-outline-danger mb-5" type="submit">Inscription</button>

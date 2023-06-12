@@ -186,3 +186,12 @@ function getArticlesByGamme($id)
     $query->execute([$id]); // Je l'exécute avec le bon paramètre
     return $query->fetchAll(); // quand il y a 1 resultat possible il n'est pas obligé de faire un fetchAll, ainsi on a directemnt l'élément souhaité
 }
+
+function inscription()
+{
+    $inputsLenghtOk = true;
+
+    if (strlen($_POST['prenom']) > 25 || strlen($_POST['prenom']) < 3) {
+        $inputsLenghtOk = false;
+    }
+}

@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
       // inclure le fichier des fonctions pour pouvoir les appeler ici
       include 'function.php';
 
@@ -65,7 +65,7 @@
 
            <form method=\"GET\" action=\"./panier.php\">
          <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-         <input type=\"submit\" class=\"btn btn-outline-danger\" value=\"Ajouter au panier\">
+         <input type=\"submit\" class=\"btn btn-outline-danger mt-2\" value=\"Ajouter au panier\">
         </form>
         </div>
         </div>

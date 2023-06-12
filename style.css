@@ -27,11 +27,16 @@ h1 {
     margin: 1em;
 }
 
-label{
-    color:white;
+label {
+    color: white;
 }
+
 span {
     width: 2em;
+}
+
+ul {
+    list-style-type: none;
 }
 
 /* 
@@ -40,10 +45,16 @@ img {
     margin: 1em;
 } */
 
-.h1_with_bg{
-background-image: url(./moog_php_v2/Rscs/png/bg_footer.png);
+.h1_with_bg {
+    background-image: url(./moog_php_v2/Rscs/png/bg_footer.png);
 }
 
+@media (min-width: 576px) {
+    .container {
+        display: flex;
+        flex-direction: row;
+    }
+}
 
 @include media-breakpoint-up(lg) {
     .entrez_votre_nom {
