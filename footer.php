@@ -17,55 +17,46 @@
 <!-- Footer -->
 <footer style="background-image: url(./Rscs/png/bg_footer.png);">
     <!-- Grid container -->
+
+    <!-- Section: Text -->
+    <section class="mb-5 ml-5 p-5 text-center">
+        <p style="color: white;">
+            Plongez dans l'univers captivant des synthétiseurs et ressentez la passion inextinguible qui animait l'âme de Robert Moog, tout comme elle animera vos compositions musicales, grâce à la magie des sons que vous pouvez créer.
+        </p>
+    </section>
     <section>
-        <div class="container p-5">
-            <!-- Section: Form -->
-            <section class="">
-                <form action="">
-                    <!--Grid row-->
-                    <div class="row d-flex justify-content-center">
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <p class="pt-2">
-                                <strong style="color: white;">Inscrivez-vous à notre newsletter</strong>
-                            </p>
-                        </div>
-                        <!--Grid column-->
-
-                        <!--Grid column-->
-                        <div class="col-md-5 col-12">
-                            <!-- Email input -->
-                            <div class="form-outline form-white mb-4">
-                                <input type="email" id="email" class="form-control" pattern=".+@globex\.com" style="color: white;" />
-                                <label class="form-label" for="form5Example21" style="color: white;">Adresse e-mail</label>
-                            </div>
-                        </div>
-                        <!--Grid column-->
-
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <!-- Submit button -->
-                            <button type="submit" class="btn btn-outline-light mb-4">
-                                S'abonner
-                            </button>
-                        </div>
-                        <!--Grid column-->
-                    </div>
-                    <!--Grid row-->
-                </form>
-            </section>
-            <!-- Section: Form -->
-
-            <!-- Section: Text -->
-            <section class="mb-1">
-                <p style="color: white;">
-                    Plongez dans l'univers captivant des synthétiseurs et ressentez la passion inextinguible qui animait l'âme de Robert Moog, tout comme elle animera vos compositions musicales, grâce à la magie des sons que vous pouvez créer.
+        <!--Grid row-->
+        <div class="row text-center">
+            <!--Grid column-->
+            <div class="col-md-3">
+                <p class="pt-2">
+                    <strong style="color: white;">Inscrivez-vous à notre newsletter</strong>
                 </p>
-            </section>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col">
+                <!-- Email input -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-outline ml-5 mr-5">
+                            <input type="email" id="email" class="form-control text-light" pattern="tours@moogmusic.com" />
+                            <label class="form-label" for="form5Example21" style="color: white opacity-25;">Adresse e-mail</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-outline-light">
+                            S'abonner
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--Grid column-->
         </div>
     </section>
     <!-- Copyright -->
-    <div class="text-center p-3 white" style="color: white;">
+    <div class="text-center p-3 white " style="color: white;">
         © 2020 Copyright:
         <a class="text-white" href="https://www.moogmusic.com/" target="_blank">moog.com</a>
     </div>

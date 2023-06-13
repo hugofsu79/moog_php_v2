@@ -16,7 +16,7 @@ include 'head.php';
     ?>
 <?php
 if (isset($_POST["mail"])) {
-    echo "Yes, mail is set";
+    echo "Oui, le profil est configuré.";
 } else {
     echo
     "<div class=\"col text-center pt-5 pb-5\">
@@ -29,7 +29,6 @@ if (isset($_POST["mail"])) {
     <a type=\"button\" class=\"btn btn-danger btn-lg mt-5 mb-5\" href=\"index.php?param=<?php?>\">Retour au menu</a> ";
 }
 
-
 ?> 
 
 
@@ -37,3 +36,4 @@ if (isset($_POST["mail"])) {
  <?php
     include 'footer.php';
     ?>
+    

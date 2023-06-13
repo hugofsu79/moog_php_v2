@@ -187,11 +187,197 @@ function getArticlesByGamme($id)
     return $query->fetchAll(); // quand il y a 1 resultat possible il n'est pas obligé de faire un fetchAll, ainsi on a directemnt l'élément souhaité
 }
 
-function inscription()
+function checkInputsLenght()
 {
     $inputsLenghtOk = true;
 
     if (strlen($_POST['prenom']) > 25 || strlen($_POST['prenom']) < 3) {
         $inputsLenghtOk = false;
     }
+
+    if (strlen($_POST['nom']) > 25 || strlen($_POST['nom']) < 3) {
+        $inputsLenghtOk = false;
+    }
+
+    if (strlen($_POST['email']) > 25 || strlen($_POST['email']) < 5) {
+        $inputsLenghtOk = false;
+    }
+
+    if (strlen($_POST['adresse']) > 40 || strlen($_POST['adresse']) < 5) {
+        $inputsLenghtOk = false;
+    }
+
+    if (strlen($_POST['code_postal']) !== 5) {
+        $inputsLenghtOk = false;
+    }
+
+    if (strlen($_POST['ville']) > 25 || strlen($_POST['ville']) < 3) {
+        $inputsLenghtOk = false;
+    }
+
+    return $inputsLenghtOk;
+}
+
+
+
+
+//checkPassword : vérifier que le mot de passe réunit tous les critères demandés
+
+
+function emailExist()
+{
+    // je me connecte à la base
+    $db = getConnection();
+
+    // je prépare ma requete pour recuperer si déjà un email
+    $query = $db->prepare('SELECT * FROM clients WHERE email = ?');
+    $query->execute([$_POST['email']]);
+    $client = $query->fetch();
+    if ($client) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function checkEmptyFields()
+{
+    foreach ($_POST as $field) {
+        if (empty($field)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function inscription()
+{
+    $db = getConnection();
+    if (checkEmptyFields() == true) {
+        echo "Attention un ou plusieurs champs vides";
+    } else {
+
+        if (checkInputsLenght() == false) {
+
+            echo "Attention longueur incorrect d'un ou plusieurs champs";
+        } else {
+
+            if (emailExist() == true) {
+                echo "Attention email déjà utilisé";
+            } else {
+
+                if (checkPassword($_POST["mot_de_passe"]) == false) {
+                    echo "Mot de passe pas sécurisé";
+                } else {
+
+                    ///!\   hachage du mot de passe     //!\
+
+                    $hashedPassword = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
+
+                    $nom = $_POST['nom'];
+                    $prenom = $_POST['prenom'];
+                    $email = $_POST['email'];
+                    $mot_de_passe = $_POST['mot_de_passe'];
+
+
+                    // je prépare ma requete: INSERT INTO "ma table" (le nom exact des champs de ma table)VALUE ()
+                    $query = $db->prepare("INSER INTO clients (nom, prenom, email, mot_de_passe) VALUES(?,?,?,?)");
+
+                    $query->execute([$nom, $prenom, $email, $mot_de_passe]);
+
+
+
+                    //2ème Syntaxe: tableau associatif
+
+                    //$query=$db->prepare("insert into clients(nom, prenom, email, mot_de_passe")
+                    //                    VALUES(:nom, :prenom, :email, :mot_de_passe)")
+
+                    //$query->execute(["nom" =>$nom,
+                    //                 "prenom" => $prenom,
+                    //                 "email" => $email
+                    //                 "mot_de_passe => $motdepasse]);
+
+
+                    $query = $db->prepare("INSER INTO adresses (adresse, code_postal, ville, user id) VALUES(?,?,?,?)");
+
+                    $query->execute([$adresse, $code_postal, $ville, $user_id]);
+
+
+                    $id = $db->lastInsertId();
+
+                    // j'execute le bon parametre
+                    $query = $db->execute([$nom, $prenom, $email, $mot_de_passe]);
+
+
+                    //une autre fonction possible 
+
+                    $id = $db->lastInsertId();
+
+                    //return des elements sous forme de tableau associatif
+                    return $query->fetch();
+                }
+            }
+        }
+    }
+
+
+
+
+
+    // Informations de connexion à la base de données
+    $servername = "localhost";
+    $nom_D_utilisateur = "nom_utilisateur";
+    $motDePasse = "mot_de_passe";
+    $dbname = "nom_base_de_donnees";
+
+    // Création de la connexion
+    $db = new mysqli($servername, $username, $mot_de_passe, $dbname);
+
+    // Vérification de la connexion
+    if ($connexion->connect_error) {
+        die("Erreur de connexion à la base de données : " . $connexion->connect_error);
+    }
+
+    // Données de l'utilisateur à sauvegarder
+    $nom = "John Doe";
+    $email = "john.doe@example.com";
+    $motDePasse = "MonMotDePasse123";
+
+    // Requête SQL pour insérer l'utilisateur dans la table
+    $sql = "INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES ('$nom', '$email', '$motDePasse')";
+
+    // Exécution de la requête
+    if ($db->query($sql) === TRUE) {
+        echo "Utilisateur sauvegardé avec succès";
+    } else {
+        echo "Erreur lors de la sauvegarde de l'utilisateur : " . $db->error;
+    }
+
+    // 8) Fermeture de la requête et de la connexion
+    $requete->close();
+    $connexion->close();
+
+    // récupération de son id : $id = $db->lastInsertId();
+    $id = $db->lastInsertId();
+
+    $query = "INSERT INTO utilisateurs (nom, email) VALUES ('John Doe', 'john.doe@example.com')";
+        // $db->($query)
+    ;
+    // Récupération de l'ID généré pour l'insertion précédente
+    $id = $db->lastInsertId();
+
+    // Affichage de l'ID
+    echo "L'ID généré est : " . $id;
+
+    //   9) insertion de l'adresse en bdd
+
+
+}
+
+
+function checkPassword($password)
+{
+    // minimum 8 caractères et maximum 15, minimum 1 lettre, 1 chiffre et 1 caractère spécial
+    $regex = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*?/&])(?=\S+$).{8,15}$^";
+    return preg_match($regex, $password);
 }
