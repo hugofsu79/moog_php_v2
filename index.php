@@ -1,12 +1,22 @@
+<header><?php
+        include 'header.php';
+
+        // Pour initialiser le panier 
+        // createCart();
+        // var_dump($_SESSION);
+
+
+        ?></header>
+
 <?php
 // inclure le fichier des fonctions pour pouvoir les appeler ici
 include 'function.php';
 
-//Initialiser la session et accéder à la superglobale $_SESSION (tableau associatif)
 session_start();
 
-
-
+// Pour initialiser le panier 
+createCart();
+// var_dump($_SESSION);
 
 //J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
 include 'head.php';
@@ -15,15 +25,6 @@ include 'head.php';
 <body>
 
 
-  <?php
-  include 'header.php';
-
-  // Pour initialiser le panier 
-  // createCart();
-  // var_dump($_SESSION);
-
-
-  ?>
 
 
   <div class="container text-center">
@@ -50,7 +51,7 @@ include 'head.php';
           // Je lance ma blouce pour afficher une carte bootstrap par article
           foreach ($articles as $article) {
 
-            echo "<div class=\"col-md-4 p-2\"><div class=\"card\">
+            echo "<div class=\"col-md-2 p-2\"><div class=\"card\">
         <img src=\"./Rscs/png/" . $article['image'] . "\">
         <div class=\"card-body\">
         <h5 class=\"card-title\">" . $article['nom'] . "</h5>
@@ -69,11 +70,14 @@ include 'head.php';
         </form>
         </div>
         </div>
-        
+        </div>
 </div>";
           }
 
           ?>
+
+
+
     </main>
     <?php
     include 'footer.php';

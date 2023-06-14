@@ -86,7 +86,7 @@ include 'head.php';
                     <div class="d-flex flex-row align-items-center">
                         <div class="card-body row">
                             <div class="col">
-                                <div class="row position-relative start-50 translate-middle-x ">
+                                <div class="row position-relative start-50 translate-middle-x">
                                     <div class="col-md-4">
                                         <img src="./Rscs/png/<?= $article['image'] ?>" class=" img-fluid rounded" alt="Shopping item" style="margin-bottom: 2em" ;>
                                     </div>

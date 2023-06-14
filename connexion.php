@@ -5,35 +5,63 @@ include 'function.php';
 //Initialiser la session et accéder à la superglobale $_SESSION (tableau associatif)
 session_start();
 
-
-
-//J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
+//J'inclus le head avec les balises de base + la balise head (pour ne pas répéter le code qu'il contient)
 include 'head.php';
+
+include 'header.php';
 ?>
 
- <?php
-    include 'header.php';
-    ?>
 <?php
-if (isset($_POST["mail"])) {
-    echo "Oui, le profil est configuré.";
-} else {
-    echo
-    "<div class=\"col text-center pt-5 pb-5\">
-    <h1 name=\"h1_with_bg\">Merci pour votre inscription 🦾</h1></div>
-    <div class=\"text-center\">
-    <div><iframe class=\"rounded-2\" src=\"https://i.giphy.com/media/3o7btZ3T6y3JTmjg4w/giphy.webp\"></iframe></div>
-        </div>
-    </div>
-    <div class=\"text-center\">
-    <a type=\"button\" class=\"btn btn-danger btn-lg mt-5 mb-5\" href=\"index.php?param=<?php?>\">Retour au menu</a> ";
+
+if(isset($_POST["connexion"])){
+    createConnection();
+}
+if(isset($id_POST['inscription'])) {
+    inscription();
+}
+// Vérification des erreurs lors de l'inscription
+$errors = [];
+
+// // Vérification des données soumises lors de l'inscription
+// if (empty($_POST['prenom'])) {
+//     $errors[] = "Veuillez fournir un prénom.";
+// }
+// // Vérification des données soumises lors de l'inscription
+// if (empty($_POST['nom'])) {
+//     $errors[] = "Veuillez fournir un nom.";
+// }
+
+// if (empty($_POST['email'])) {
+//     $errors[] = "Veuillez fournir une adresse e-mail.";
+// }
+
+// if (empty($_POST['mot_de_passe'])){
+//     $errors[] = "Veuillez fournir un mot de passe correct";
+// }
+
+// paramètres de connexion à la base de données
+$nom = 'nom';
+$prenom = 'prenom';
+$password_db = 'votre_mot_de_passe';
+
+//connexion à la base de données
+// $pdo = new PDO("mysql:name=$name;db=$db", $username_db, $password_db);
+
+// Vérif si l'adresse e-mail existe déjà
+$query = "SELECT COUNT(*) as count FROM utilisateurs WHERE email = :email";
+
+// Affichage des erreurs sur la page de connexion
+if (!empty($errors)) {
+    echo "<ul>";
+    foreach ($errors as $error) {
+        echo "<li>$error</li>";
+    }
+    echo "</ul>";
 }
 
-?> 
+?>
 
 
-
- <?php
-    include 'footer.php';
-    ?>
-    
+<?php
+include 'footer.php';
+?>
