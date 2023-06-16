@@ -18,7 +18,9 @@ include 'header.php';
 // Pour initialiser le panier 
 // createCart();
 // var_dump($_SESSION);
-
+if(isset($_POST['deconnection()'])){
+  deconnection();
+}
 
 ?>
 
@@ -68,7 +70,7 @@ include 'header.php';
 
   echo
     "<div class=\"card\" style=\"width: 18rem;\">
-  <img src=\"./Rscs/png/\" . $article['image'] . "\">
+  <img src=\"./Rscs/png/\"" . $article['image'] . "\">
   <div class=\"card-body\">
     <h5 class=\"card-title\">" . $article['nom'] . "</h5>
     <p class=\"card-text\">" . $article['description'] . "</p>

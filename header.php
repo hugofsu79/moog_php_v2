@@ -21,7 +21,6 @@
             <a class="nav-link active" aria-current="panier" href="./Boutique.php">Boutique</a>
           </li>
         </ul>
-        <form class="d-flex" role="connection">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <?php if (isset($_SESSION['client']['id'])) { ?>
               <li class="nav-item">
@@ -36,7 +35,7 @@
                   <ul class="dropdown-menu dropdown-menu-light">
                     <li class="nav-item"><a href="mon_compte.php">Mon compte</a></li>
                     <form action="./index.php" method="post">
-                      <a type="submit" name="deconnection" class="btn btn-outline-dark">Déconnexion</a>
+                      <button type="submit" name="deconnection" class="btn btn-outline-dark">Déconnexion</button>
                     </form>
                     <li class="nav-item"><?php } else {
                                           echo "<a href=\"./inscription.php\">connexion/inscription</a>";
@@ -45,7 +44,6 @@
                 </div>
               </li>
           </ul>
-        </form>
       </div>
     </div>
   </nav>

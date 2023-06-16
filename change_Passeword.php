@@ -1,3 +1,18 @@
+<?php
+// inclure le fichier des fonctions pour pouvoir les appeler ici
+include 'function.php';
+
+//Initialiser la session et accéder à la superglobale $_SESSION (tableau associatif)
+session_start();
+
+// Pour initialiser le panier 
+createCart();
+
+//J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
+include 'head.php';
+?>
+
+
 <body>
     <header>
         <?php
@@ -15,7 +30,11 @@
             </ol>
         </nav>
 
-
+        <?php
+        if (isset($_POST['newPassword'])) {
+            updatePassword();
+        }
+        ?>
 
 
 
@@ -24,9 +43,8 @@
         </div>
 
         <div class="container w-50 p-5 border border-dark bg-light mb-5 p-5 rounded-2">
-            <form action="account.php" method="post">
+            <form action="./change_Passeword.php" method="post">
                 <input type="hidden" name="passwordModified" value="true">
-                <input type="hidden" name="clientId" value="<?php echo $_SESSION['id'] ?>">
                 <div class="form-row text-center justify-content-center">
                     <div class="form-group col-md-6">
                         <label for="inputPassword" class="text-dark">Ancien mot de passe</label>

@@ -414,13 +414,13 @@ function modifInfo()
         if (checkInputsLenght() == false) {
             echo "<script> alert(\"erreure,Les longueures ne sont pas bonnes\"); </script>";
         } else {
-            $db=getConnection();
+            $db = getConnection();
             $query = $db->prepare('UPDATE clients SET nom=:nom, prenom=:prenom, email=:email WHERE id=:id');
             $query->execute([
                 'nom' => $_POST['nom'],
-                'prenom' =>$_POST['prenom'],
-                'email' =>$_POST['email'],
-                'id'=>$_SESSION['client']['id'],
+                'prenom' => $_POST['prenom'],
+                'email' => $_POST['email'],
+                'id' => $_SESSION['client']['id'],
             ]);
             $_SESSION['client']['nom'] = $_POST['nom'];
             $_SESSION['client']['prenom'] = $_POST['prenom'];
@@ -444,18 +444,19 @@ function modifAdresse()
         if (checkInputsLenght() == false) {
             echo "<script> alert(\"erreure,Les longueures ne sont pas bonnes\"); </script>";
         } else {
-            $db=getConnection();
-            $query = $db->prepare('UPDATE clients SET nom=:nom, prenom=:prenom, email=:email WHERE id=:id_client');
+            $db = getConnection();
+            $query = $db->prepare('UPDATE adresses SET adresse=:adresse, code_postal=:code_postal, ville=:ville WHERE id_client=:id_client');
             $query->execute([
                 'adresse' => $_POST['adresse'],
-                'code_postal' =>$_POST['code_postal'],
-                'ville' =>$_POST['ville'],
+                'code_postal' => $_POST['code_postal'],
+                'ville' => $_POST['ville'],
+                'id_client' => $_SESSION['client']['id'],
             ]);
 
 
-            $_SESSION['id_client']['adresse'] = $_POST['adresse'];
-            $_SESSION['id_client']['code_postal'] = $_POST['code_postal'];
-            $_SESSION['id_client']['ville'] = $_POST['ville'];
+            $_SESSION['client']['adresse'] = $_POST['adresse'];
+            $_SESSION['client']['code_postal'] = $_POST['code_postal'];
+            $_SESSION['client']['ville'] = $_POST['ville'];
 
 
             echo "<script> alert(\"Adresse modifiée\")</script>";
@@ -468,4 +469,34 @@ function modifAdresse()
 //WHERE client_id
 
 
-function updatePassword(){}
+function updatePassword()
+{
+    if (checkEmptyFields() == true) {
+        echo "<script> alert(\"erreure, un ou plusieurs champs vides\"); </script>";
+    } else {
+
+
+        if (!password_verify($_POST['oldPassword'], $_SESSION['client']['mot_de_passe'])) {
+            echo "<script> alert(\"Ancien mot de passe incorrect\"); </script>";
+        } else {
+            if (checkPassword(strip_tags($_POST["newPassword"])) == false) { //verif si le mdp est correct
+                echo "<script> alert(\"Nouveau mot de passe pas assez sécurisé\"); </script>";
+            } else {
+
+                ///!\   hachage du mot de passe -> on le stock dans une variabe      ///!\
+                $hashedPassword = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+
+
+                $db = getConnection();
+
+
+                $query = $db->prepare('UPDATE clients SET mot_de_passe = :mot_de_passe WHERE id = :id');
+                $query->execute([
+                    'mot_de_passe' => $hashedPassword,
+                    'id' => $_SESSION['client']['id'],
+                ]);
+                echo "<script> alert(\"Mot de passe changé\"); </script>";
+            }
+        }
+    }
+}
