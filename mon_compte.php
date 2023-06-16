@@ -30,32 +30,30 @@ include 'head.php';
         <div class="row">
             <div class="col">
                 <a href="./modifInfos.php"><button type="button" class="btn btn-light">
-                        <p class="fs-1 fw-bold">&#8505;<br></p>
+                        <p class="fs-1 fw-bold mb-5">&#8505;<br></p>
                         Modifier mes information
                     </button></a>
             </div>
             <div class="col">
-                <a href=""><button type="button" class="btn btn-light">
-                    <p class="fs-1 fw-bold">&#127980;<br></p>
-                    Voir mes commandes
+                <a href="./lesCommandes.php"><button type="button" class="btn btn-light">
+                        <p class="fs-1 fw-bold mb-5">&#127980;<br></p>
+                        Voir mes commandes
+                    </button></a>
+            </div>
+            <div class="col">
+                <a href="./change_Passeword.php"><button type="button" class="btn btn-light">
+                    <p class="fs-1 fw-bold mb-4">&#128274;<br></p>
+                    Modifier mon mot de passe<br>
                 </button></a>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-light">
-                    <p class="fs-1 fw-bold">&#128274;<br></p>
-                    Modifier mon mot de passe<br>
-                </button>
+                <a href="./modifAdresse.php"><button type=" button" class="btn btn-light">
+                        <p class="fs-1 fw-bold">&#127969;<br></p>
+                        Modifier mon adresse<br>
+                    </button></a>
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-    <a href="./modifAdresse.php"><button type=" button" class="btn btn-light mt-4">
-            <p class="fs-1 fw-bold">&#127969;<br></p>
-            Modifier mon adresse<br>
-        </button></a>
-    </div>
-    </div>
-
     <?php
     include 'footer.php';
     ?>

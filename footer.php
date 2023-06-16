@@ -26,29 +26,31 @@
     </section>
     <section>
         <!--Grid row-->
-        <div class="row text-center">
-            <!--Grid column-->
-            <div class="col-md-3">
-                <p class="pt-2">
-                    <strong style="color: white;">Inscrivez-vous à notre newsletter</strong>
-                </p>
-            </div>
-            <!--Grid column-->
+        <div href="container-fluid text-center">
+            <div class="row text-center">
+                <!--Grid column-->
+                <div class="col-md-3">
+                    <p class="pt-2">
+                        <strong style="color: white;">Inscrivez-vous à notre newsletter</strong>
+                    </p>
+                </div>
+                <!--Grid column-->
 
-            <!--Grid column-->
-            <div class="col">
-                <!-- Email input -->
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-outline ml-5 mr-5">
-                            <input type="email" id="email" class="form-control text-light" pattern="tours@moogmusic.com" />
-                            <label class="form-label" for="form5Example21" style="color: white opacity-25;">Adresse e-mail</label>
+                <!--Grid column-->
+                <div class="col">
+                    <!-- Email input -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-outline ml-5 mr-5">
+                                <input type="email" id="email" class="form-control text-light" pattern="tours@moogmusic.com" />
+                                <label class="form-label" for="form5Example21" style="color: white opacity-25;">Adresse e-mail</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-light">
-                            S'abonner
-                        </button>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-outline-light">
+                                S'abonner
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

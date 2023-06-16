@@ -466,3 +466,6 @@ function modifAdresse()
 
 
 //WHERE client_id
+
+
+function updatePassword(){}

@@ -26,12 +26,12 @@ if (isset($_POST['adresse'])) {
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Mon compte</a></li>
+        <li class="breadcrumb-item"><a href="./mon_compte.php">Mon compte</a></li>
         <li class="breadcrumb-item active" aria-current="page">Modifier l'adresse</li>
     </ol>
 </nav>
 
-<h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Modifier mon adresse</h1>
+<h1 class="modal-title fs-5 text-light p-5" id="exampleModalLabel">Modifier mon adresse</h1>
 <div class="container">
     <form action="./modifInfos.php" method="post">
 
@@ -39,7 +39,7 @@ if (isset($_POST['adresse'])) {
 
             <div class="col">
                 <div class="form-group pb-2">
-                    <label for="prenom" style="color: white;">Adresse</label>
+                    <label for="adresse" style="color: white;">Adresse</label>
                     <input type="text" required class="form-control" name="adresse" value="<?php echo $_SESSION['id_client']['adresse'] ?>">
                 </div>
             </div>
@@ -47,7 +47,7 @@ if (isset($_POST['adresse'])) {
 
             <div class="col">
                 <div class="form-group pb-2">
-                    <label for="nom" style="color: white;">Code postal</label>
+                    <label for="code_postal" style="color: white;">Code postal</label>
                     <input type="text" required class="form-control" name="code_postal" value="<?php echo $_SESSION['id_client']['code_postal'] ?>">
                 </div>
             </div>
@@ -55,7 +55,7 @@ if (isset($_POST['adresse'])) {
 
             <div class="col">
                 <div class="form-group pb-2">
-                    <label for="nom" style="color: white;">Ville</label>
+                    <label for="ville" style="color: white;">Ville</label>
                     <input type="text" required class="form-control" name="ville" value="<?php echo $_SESSION['id_client']['ville'] ?>">
                 </div>
             </div>
