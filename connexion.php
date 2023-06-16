@@ -8,17 +8,19 @@ session_start();
 //J'inclus le head avec les balises de base + la balise head (pour ne pas répéter le code qu'il contient)
 include 'head.php';
 
-include 'header.php';
-?>
-
-<?php
 
 if(isset($_POST["connexion"])){
     createConnection();
 }
-if(isset($id_POST['inscription'])) {
+if(isset($_POST['inscription'])) {
     inscription();
 }
+
+include 'header.php';
+
+?>
+
+<?php
 // Vérification des erreurs lors de l'inscription
 $errors = [];
 

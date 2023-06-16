@@ -1,4 +1,8 @@
 <?php
+
+
+
+
 // ************************connexion à la base de données//
 
 function getConnection()
@@ -18,7 +22,14 @@ function getConnection()
     // Je retourne la connexion stockée dans une variable
     return $db;
 }
+
+
+
+
+
+
 // *************** Renvoyer un tableau d'articles ***************
+
 
 function getArticles()
 {
@@ -31,6 +42,9 @@ function getArticles()
     //Je recupère les résultats et je les renvoie grâce à return
     return $results->fetchAll();
 }
+
+
+
 
 // *************** Recupérer un article à partir de son id *************** 
 
@@ -45,6 +59,8 @@ function getArticleFromId($id)
     $query->execute([$id]); // Je l'exécute avec le bon paramètre
     return $query->fetch(); // quand il y a 1 resultat possible il n'est pas obligé de faire un fetchAll, ainsi on a directemnt l'élément souhaité
 }
+
+
 
 // *************** Initialiser le panier *************** //
 
@@ -193,29 +209,44 @@ function getArticlesByGamme($id)
 function checkInputsLenght()
 {
     $inputsLenghtOk = true;
-
-    if (strlen($_POST['prenom']) > 25 || strlen($_POST['prenom']) < 3) {
-        $inputsLenghtOk = false;
+    if (isset($_POST['prenom'])) {
+        if (strlen($_POST['prenom']) > 25 || strlen($_POST['prenom']) < 3) {
+            $inputsLenghtOk = false;
+        }
     }
 
-    if (strlen($_POST['nom']) > 25 || strlen($_POST['nom']) < 3) {
-        $inputsLenghtOk = false;
+
+    if (isset($_POST['nom'])) {
+        if (strlen($_POST['nom']) > 25 || strlen($_POST['nom']) < 3) {
+            $inputsLenghtOk = false;
+        }
     }
 
-    if (strlen($_POST['email']) > 25 || strlen($_POST['email']) < 5) {
-        $inputsLenghtOk = false;
+    if (isset($_POST['email'])) {
+        if (strlen($_POST['email']) > 25 || strlen($_POST['email']) < 5) {
+            $inputsLenghtOk = false;
+        }
     }
 
-    if (strlen($_POST['adresse']) > 40 || strlen($_POST['adresse']) < 5) {
-        $inputsLenghtOk = false;
+
+    if (isset($_POST['adresse'])) {
+        if (strlen($_POST['adresse']) > 40 || strlen($_POST['adresse']) < 5) {
+            $inputsLenghtOk = false;
+        }
     }
 
-    if (strlen($_POST['code_postal']) !== 5) {
-        $inputsLenghtOk = false;
+
+    if (isset($_POST['code_postal'])) {
+        if (strlen($_POST['code_postal']) !== 5) {
+            $inputsLenghtOk = false;
+        }
     }
 
-    if (strlen($_POST['ville']) > 25 || strlen($_POST['ville']) < 3) {
-        $inputsLenghtOk = false;
+
+    if (isset($_POST['ville'])) {
+        if (strlen($_POST['ville']) > 25 || strlen($_POST['ville']) < 3) {
+            $inputsLenghtOk = false;
+        }
     }
 
     return $inputsLenghtOk;
@@ -275,202 +306,163 @@ function checkEmptyFields()
 }
 //******************     Inscription     *************************
 
-// function inscription()
-// {
-//     $db = getConnection();
-//     if (checkEmptyFields() == true) {
-//         echo "Attention un ou plusieurs champs vides";
-//     } else {
-
-//         if (checkInputsLenght() == false) {
-//             echo "Attention longueur incorrect d'un ou plusieurs champs";
-//         } else {
-
-//             if (emailExist() == true) {
-//                 echo "Attention email déjà utilisé";
-//             } else {
-
-//                 if (checkPassword(strip_tags($_POST["mot_de_passe"])) == false) { //verif si le mdp est correct
-//                     echo "Mot de passe pas sécurisé";
-//                 } else {
-
-//                     ///!\   hachage du mot de passe -> on le stock dans une variabe      //!\
-//                     $hashedPassword = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT); //   https://www.php.net/manual/en/function.password-hash
-//                     $nom = $_POST['nom'];
-//                     $prenom = $_POST['prenom'];
-//                     $email = $_POST['email'];
-//                     $mot_de_passe = $_POST['mot_de_passe'];
-//                     // je prépare ma requete: INSERT INTO "ma table" (le nom exact des champs de ma table)VALUE ()
-//                     // $query = $db->prepare("INSER INTO clients (nom, prenom, email, mot_de_passe) VALUES(?,?,?,?)");
-//                     // $query->execute([$nom, $prenom, $email, $mot_de_passe]);
-
-//                     //2ème Syntaxe: tableau associatif
-//                     $query = $db->prepare('insert into clients(nom, prenom, email, mot_de_passe');
-//                     $query->execute([
-//                         'nom' => $nom,
-//                         'prenom' => $prenom,
-//                         'email' => $email,
-//                         'mot_de_passe' => $mot_de_passe,
-//                     ]);
-
-
-//                     //Adresse
-
-//                     //une autre fonction possible 
-
-//                     $id = $db->lastInsertId();
-
-
-//                     creatAddress($id);
-//                     //On renvoie un message de succès 
-//                     echo '<script>alert(\'le compte a bien été créé ! \')</script>';
-//                 }
-//             }
-//         }
-
-        //Créer une nouvelle adresse
-
-        function creatAddress($user_id)
-        {
-            $db = getConnection();
-
-            $query = $db->prepare('INSERT INTO adresses (id_client, adresse, code_postal, ville) VALUES(:id_client, :adresse, :code_postal, :ville)');
-            $query->execute(array(
-                'id_client' => $user_id,
-                'adresse' => strip_tags($_POST['addresse']),
-                'code_postal' => strip_tags($_POST['code_postal']),
-                'ville' => strip_tags($_POST['ville']),
-
-            ));}
-
-//******************     Informations de connexion à la base de données     *************************
-    function connexion(){
-        $servername = "localhost";
-        $nom_utilisateur = "nom_utilisateur";
-        $motDePasse = "mot_de_passe";
-        $dbname = "nom_base_de_donnees";
-
-        // Création de la connexion
-        $db = new mysqli($servername, $mot_de_passe, $dbname);
-
-        // Vérification de la connexion
-        if ($connexion->connect_error) {
-            die("Erreur de connexion à la base de données : " . $connexion->connect_error);
-        }
-
-        // Données de l'utilisateur à sauvegarder
-        $nom = "John Doe";
-        $email = "john.doe@example.com";
-        $motDePasse = "MonMotDePasse123";
-
-        // Requête SQL pour insérer l'utilisateur dans la table
-        $sql = "INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES ('$nom', '$email', '$motDePasse')";
-
-        // Exécution de la requête
-        if ($db->query($sql) === TRUE) {
-            echo "Utilisateur sauvegardé avec succès";
-        } else {
-            echo "Erreur lors de la sauvegarde de l'utilisateur : " . $db->error;
-        }
-
-        // 8) Fermeture de la requête et de la connexion
-        $requete->close();
-        $connexion->close();
-
-        // récupération de son id : $id = $db->lastInsertId();
-        $id = $db->lastInsertId();
-
-        $query = "INSERT INTO utilisateurs (nom, email) VALUES ('John Doe', 'john.doe@example.com')";
-            // $db->($query)
-        ;
-        // Récupération de l'ID généré pour l'insertion précédente
-        $id = $db->lastInsertId();
-
-        // Affichage de l'ID
-        echo "L'ID généré est : " . $id;
-    }
-
-//******************     Je crée une fonction de connection     *************************
-
-function createConnection(){
-
-
-    // je connecte à la base
-
-$db = getConnection();
-
-
-//je recupere le client si il existe
-
-$client = emailExist();
-if($client == true){
-    if (password_verify($_POST["mot_de_passe"], $client ["mot_de_passe"])){
-        $_SESSION['client'] = $client;
-        echo "vous êtes connecté !";
-    }
-    else {
-        echo "votre mot de passe est incorrect";
-        }
-    }
-    else {
-    echo "vous n'avez pas de compte";
-    }
-}
-
-
-// ***************** Créer un utilisateur *************
-
-function createUser()
+function inscription()
 {
-    //je me connecte à la bdd
     $db = getConnection();
+    if (checkEmptyFields() == true) {
+        echo "Attention un ou plusieurs champs vides";
+    } else {
 
-    // je vérifie que les champs ne sont pas vides 
-    if (checkEmptyFields()) {
+        if (checkInputsLenght() == false) {
+            echo "Attention longueur incorrect d'un ou plusieurs champs";
+        } else {
 
-        // je vérifie la longueur des champs 
-        if (checkInputsLenght() == true) {
+            if (emailExist() == true) {
+                echo "Attention email déjà utilisé";
+            } else {
 
-            // je vérifie si l'email existe déjà
-            if (emailExist() == false) {
+                if (checkPassword(strip_tags($_POST["mot_de_passe"])) == false) { //verif si le mdp est correct
+                    echo "Mot de passe pas sécurisé";
+                } else {
 
-                // je vérifie si le mot de passe est suffisamment sécurisé grâce à la regex et je le hache avec password_hash()
-                if (checkPassword($_POST['mot_de_passe'])) {
-                    $password = password_hash(strip_tags($_POST['mot_de_passe']), PASSWORD_DEFAULT);
+                    ///!\   hachage du mot de passe -> on le stock dans une variabe      //!\
+                    $hashedPassword = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT); //   https://www.php.net/manual/en/function.password-hash
+                    $nom = $_POST['nom'];
+                    $prenom = $_POST['prenom'];
+                    $email = $_POST['email'];
+                    // je prépare ma requete: INSERT INTO "ma table" (le nom exact des champs de ma table)VALUE ()
+                    // $query = $db->prepare("INSER INTO clients (nom, prenom, email, mot_de_passe) VALUES(?,?,?,?)");
+                    // $query->execute([$nom, $prenom, $email, $mot_de_passe]);
 
-                    // je prépare ma requette d'insertion
-                    $query = $db->prepare("INSERT INTO clients(nom,prenom,email, mot_de_passe)
-                VALUES (:nom,:prenom,:email,:mot_de_passe)");
-
-                    // j'execute ma requete
+                    //2ème Syntaxe: tableau associatif
+                    $query = $db->prepare('INSERT INTO clients(nom, prenom, email, mot_de_passe) VALUES (:nom, :prenom, :email, :mot_de_passe)');
                     $query->execute([
-                        'nom' => strip_tags($_POST['nom']),
-                        'prenom' => strip_tags($_POST['prenom']),
-                        'email' => strip_tags($_POST['email']),
-                        'mot_de_passe' => strip_tags($password),
+                        'nom' => $nom,
+                        'prenom' => $prenom,
+                        'email' => $email,
+                        'mot_de_passe' => $hashedPassword,
                     ]);
-                    // récupération de l'id de l'utilisateur crée avec :  $id = $db->lastInsertId(); (fonction native php) 
+
+
+                    //Adresse
+
+                    //une autre fonction possible 
+
                     $id = $db->lastInsertId();
 
-                    // insertion de son adresse dans la table adresses
-                    creatAddress($id);
 
-                    // On renvoie un message de succès
-                    echo '<script>alert Le compte a bien été créé </script>';
-                } else {
-                    echo "Mot de passe non sécurisé";
+                    creatAddress($id);
+                    //On renvoie un message de succès 
+                    echo '<script>alert(\'le compte a bien été créé ! \')</script>';
                 }
-            } else {
-                echo "Votre email existe déjà";
             }
+        }
+    }
+}
+
+//Créer une nouvelle adresse
+
+function creatAddress($user_id)
+{
+    $db = getConnection();
+
+    $query = $db->prepare('INSERT INTO adresses (id_client, adresse, code_postal, ville) VALUES(:id_client, :adresse, :code_postal, :ville)');
+    $query->execute(array(
+        'id_client' => $user_id,
+        'adresse' => strip_tags($_POST['adresse']),
+        'code_postal' => strip_tags($_POST['code_postal']),
+        'ville' => strip_tags($_POST['ville']),
+    ));
+}
+
+//******************     Informations de connexion à la base de données     *************************
+
+//******************     Je crée une fonction de connexion     *************************
+
+function createConnection()
+{
+    //je recupere le client si il existe
+
+    $client = emailExist();
+    if ($client == true) {
+        if (password_verify($_POST["mot_de_passe"], $client["mot_de_passe"])) {
+            $_SESSION['client'] = $client;
+            echo "vous êtes connecté !";
         } else {
-            echo "la longueur des champs n'est pas valide";
+            echo "votre mot de passe est incorrect";
         }
     } else {
-        echo "Des champs ne sont pas remplis";
+        echo "vous n'avez pas de compte";
+    }
+}
+
+function deconnection()
+{
+    $_SESSION["client"] = [];
+    echo "<script> alert(\"Déconnecté\"); </script>";
+}
+
+
+
+//******************     Modifier Profil    *************************
+
+function modifInfo()
+{
+    if (checkEmptyFields() == true) {
+        echo "<script> alert(\"erreure, un ou plusieurs champs vides\"); </script>";
+    } else {
+        if (checkInputsLenght() == false) {
+            echo "<script> alert(\"erreure,Les longueures ne sont pas bonnes\"); </script>";
+        } else {
+            $db=getConnection();
+            $query = $db->prepare('UPDATE clients SET nom=:nom, prenom=:prenom, email=:email WHERE id=:id');
+            $query->execute([
+                'nom' => $_POST['nom'],
+                'prenom' =>$_POST['prenom'],
+                'email' =>$_POST['email'],
+                'id'=>$_SESSION['client']['id'],
+            ]);
+            $_SESSION['client']['nom'] = $_POST['nom'];
+            $_SESSION['client']['prenom'] = $_POST['prenom'];
+            $_SESSION['client']['email'] = $_POST['email'];
+
+
+            echo "<script> alert(\"modification validée\")</script>";
+        }
     }
 }
 
 
 
-?>
+//******************     Modifier adresse    *************************
+
+function modifAdresse()
+{
+    if (checkEmptyFields() == true) {
+        echo "<script> alert(\"erreure, un ou plusieurs champs vides\"); </script>";
+    } else {
+        if (checkInputsLenght() == false) {
+            echo "<script> alert(\"erreure,Les longueures ne sont pas bonnes\"); </script>";
+        } else {
+            $db=getConnection();
+            $query = $db->prepare('UPDATE clients SET nom=:nom, prenom=:prenom, email=:email WHERE id=:id_client');
+            $query->execute([
+                'adresse' => $_POST['adresse'],
+                'code_postal' =>$_POST['code_postal'],
+                'ville' =>$_POST['ville'],
+            ]);
+
+
+            $_SESSION['id_client']['adresse'] = $_POST['adresse'];
+            $_SESSION['id_client']['code_postal'] = $_POST['code_postal'];
+            $_SESSION['id_client']['ville'] = $_POST['ville'];
+
+
+            echo "<script> alert(\"Adresse modifiée\")</script>";
+        }
+    }
+}
+
+
+
+//WHERE client_id

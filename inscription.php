@@ -5,47 +5,32 @@
     //Initialiser la session et accéder à la superglobale $_SESSION (tableau associatif)
     session_start();
 
-
+    // Pour initialiser le panier 
+    createCart();
 
     //J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
     include 'head.php';
     ?>
-<header><?php
-        include 'header.php';
-
-        // Pour initialiser le panier 
-        // createCart();
-        // var_dump($_SESSION);
-
-
-        ?></header>
-
-<?php
-// inclure le fichier des fonctions pour pouvoir les appeler ici
-include 'function.php';
-
-session_start();
-
-// Pour initialiser le panier 
-createCart();
-// var_dump($_SESSION);
-
-//J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
-include 'head.php';
-?>
  <?php
     include 'header.php';
+
+    // Pour initialiser le panier 
+    // createCart();
+    // var_dump($_SESSION);
+
+
     ?>
 
  <?php
+
     if (isset($_POST['mail'])) {
         var_dump($_POST);
     }
     if (isset($_POST['motdepasse'])) {
-    } 
-    
-    if(isset($_POST['inscription'])) {
-        createUser();
+    }
+
+    if (isset($_POST['inscription'])) {
+        inscription();
     }
     ?>
 
@@ -133,15 +118,15 @@ include 'head.php';
                          <textarea id=adresse name="adresse" rows=1 required class="form-control" placeholder="Votre adresse"></textarea>
                      </div>
                      <div class="col-md-3">
-                         <label for=codepostal>CP</label>
-                         <input name="codepostal" type=text required class="form-control mb-5 text-center" placeholder="Code">
+                         <label for=code_postal>CP</label>
+                         <input name="code_postal" type=text required class="form-control mb-5 text-center" placeholder="Code">
                      </div>
                      <div class="col-md-4">
                          <label for=ville>Ville</label>
                          <input name="ville" type=text required class="form-control mb-5" placeholder="Asheville">
                      </div>
                      <div>
-                         <button class="col-md-4 btn btn-outline-danger mb-5" type="submit">Inscription</button>
+                         <button class="col-md-4 btn btn-outline-danger mb-5" type="submit" name="inscription" value="true">Inscription</button>
                      </div>
                  </div>
              </div>
@@ -151,13 +136,7 @@ include 'head.php';
  </body>
 
 
- // Après avoir inséré les données dans la base de données avec succès
-$id = $pdo->lastInsertId();
 
-
- <?php
-    var_dump($_SESSION);
-    ?>
 
 
  <?php

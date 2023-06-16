@@ -1,13 +1,3 @@
-<header><?php
-        include 'header.php';
-
-        // Pour initialiser le panier 
-        // createCart();
-        // var_dump($_SESSION);
-
-
-        ?></header>
-
 <?php
 // inclure le fichier des fonctions pour pouvoir les appeler ici
 include 'function.php';
@@ -21,6 +11,18 @@ createCart();
 //J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
 include 'head.php';
 ?>
+
+
+<?php
+include 'header.php';
+
+// Pour initialiser le panier 
+// createCart();
+// var_dump($_SESSION);
+
+
+?>
+
 
 
 

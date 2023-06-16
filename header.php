@@ -1,43 +1,52 @@
-<?php
-if (isset($_SESSION['user_id'])) {
-  echo '<li><a href="deconnexion.php">Déconnexion</a></li>';
-} else {
-  echo '<li><a href="inscription.php">Connexion</a></li>';
-  echo '<li><a href="inscription.php">Inscription</a></li>';
-}
-?>
+<header>
 
 
-
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="./index.php">
-      <img src="./Rscs/png/moog_music_logo.png" alt="Bootstrap" width="80" height="auto">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <div class="container overflow-hidden text-center">
-          <div class="row gx-5">
-            <div class="col-md-2">
-              <a class="nav-link active" aria-current="panier" href="./panier.php">Panier</a>
-            </div>
-            <div class="col-md-2">
-              <a class="nav-link active" aria-current="inscriptionconnexion" href="./gammes.php">Gammes</a>
-            </div>
-            <div class="col-md-5">
-              <a class="nav-link active" aria-current="inscriptionconnexion" href="./inscription.php">Connexion ou Inscription</a> <!-- Vérifier si la session contient un id d'utilisateur. Si oui : l'utilisateur est connecté -->
-            </div> <!-- => afficher les liens "mon compte" et "déconnexion. Sinon, afficher "connexion"/"inscription"/.
-            <div class="col-md-2">
-              <a class="nav-link active" aria-current="panier" href="./Boutique.php">Boutique</a>
-            </div>
-          </div>
-        </div>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="./index.php">
+        <img src="./Rscs/png/moog_music_logo.png" alt="Bootstrap" width="80" height="auto">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="panier" href="./panier.php">Panier</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link active" aria-current="inscriptionconnexion" href="./gammes.php">Gammes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="panier" href="./Boutique.php">Boutique</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="connection">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <?php if (isset($_SESSION['client']['id'])) { ?>
+              <li class="nav-item">
+                <div class="dropdown">
+                  <button class="btn btn-light dropdown-toggle pr-5" data-bs-toggle="dropdown" aria-expanded="false">
+                    <?php if (isset($_SESSION['client']['id'])) { ?>
+                      <p>&#127772;<?= $_SESSION['client']['prenom'] ?>
+                      </p>
+                    <?php }
+                    ?>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-light">
+                    <li class="nav-item"><a href="mon_compte.php">Mon compte</a></li>
+                    <form action="./index.php" method="post">
+                      <a type="submit" name="deconnection" class="btn btn-outline-dark">Déconnexion</a>
+                    </form>
+                    <li class="nav-item"><?php } else {
+                                          echo "<a href=\"./inscription.php\">connexion/inscription</a>";
+                                        } ?></li>
+                  </ul>
+                </div>
+              </li>
+          </ul>
+        </form>
       </div>
     </div>
-  </div>
-</nav>
-
-<!-- if else // donner une condition si l'utilisateur est connecté Mon compte déconnection, connecter en tant que prénom & nom -->
+  </nav>
+</header>

@@ -26,24 +26,36 @@ include 'head.php';
     ?>
     <h1>Mon compte</h1>
 
-    <div class="container text-center text-light">
+    <div class="container text-center pb-5">
         <div class="row">
             <div class="col">
-                <i class="fs-1 fw-bold">&#8505;</i><br>
-                Modifier mes information
+                <a href="./modifInfos.php"><button type="button" class="btn btn-light">
+                        <p class="fs-1 fw-bold">&#8505;<br></p>
+                        Modifier mes information
+                    </button></a>
             </div>
             <div class="col">
-                <i class="fs-1 fw-bold">&#128274;</i><br>
-                Modifier mon mot de passe
+                <a href=""><button type="button" class="btn btn-light">
+                    <p class="fs-1 fw-bold">&#127980;<br></p>
+                    Voir mes commandes
+                </button></a>
             </div>
             <div class="col">
-                <i class="fs-1 fw-bold">&#127980;</i><br>
-                Voir mes commandes
+                <button type="button" class="btn btn-light">
+                    <p class="fs-1 fw-bold">&#128274;<br></p>
+                    Modifier mon mot de passe<br>
+                </button>
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+    <a href="./modifAdresse.php"><button type=" button" class="btn btn-light mt-4">
+            <p class="fs-1 fw-bold">&#127969;<br></p>
+            Modifier mon adresse<br>
+        </button></a>
+    </div>
+    </div>
+
     <?php
     include 'footer.php';
     ?>
-
-

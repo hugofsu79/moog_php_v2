@@ -1,27 +1,28 @@
+<?php
+// inclure le fichier des fonctions pour pouvoir les appeler ici
+include 'function.php';
+
+session_start();
+
+// Pour initialiser le panier 
+createCart();
+// var_dump($_SESSION);
+
+?>
+<?php
+include 'header.php';
+
+// Pour initialiser le panier 
+// createCart();
+// var_dump($_SESSION);
+
+
+?>
+
+
+
 <body>
 
-    <!-- // Le produit est l'action du formulaire -->
-
-    <?php
-    // inclure le fichier des fonctions pour pouvoir les appeler ici
-    include 'function.php';
-
-    session_start();
-
-    // Pour initialiser le panier 
-    createCart();
-
-
-    //J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
-    include 'head.php';
-    ?>
-    <?php
-    include 'header.php';
-
-    // Pour initialiser le panier 
-    // createCart();
-    // var_dump($_SESSION);
-    ?>
 
     <main class="pb-5">
         <div class="container text-center bg-white">
@@ -36,17 +37,31 @@
 
             //3) afficher ses infos
             ?>
-            <h1 class="card-title p-3"><?= $article['nom'] ?></h1>
-            <img src=" ./Rscs/png/<?= $article['image'] ?>" class=" img-fluid rounded" alt="Shopping item" style="margin-bottom: 2em";>
-            <div class="card-body">
-                <h5 class="card-title pb-4"><?= $article['prix'] ?> €</h5>
-                <p class="card-text pb-4"><?= $article['description'] ?></p>
-                <p class="card-text pb-3"><small class="text-body-secondary"><?= $article['description_detaillee'] ?></small></p>
-                <input type="submit" class="btn btn-outline-danger mb-5" value="Ajouter au panier">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="card-title"><?= $article['nom'] ?></h1>
+                            </div>
+                            <div class="col-md-12">
+                                <h5 class="card-title"><?= $article['prix'] ?> €</h5>
+                            </div>
+                            <div class="col-md-12">
+                                <p class="card-text pt-5"><?= $article['description'] ?></p>
+                            </div>
+                            <div class="col-md-12">
+                                <p class="card-text"><small class="text-body-secondary"><?= $article['description_detaillee'] ?></small></p>
+                                <input type="submit" class="btn btn-outline-danger mb-5" value="Ajouter au panier">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src=" ./Rscs/png/<?= $article['image'] ?>" class="object-fit-none img-fluid rounded" alt="Shopping item" style="margin-bottom: 2em" ;>
+                    </div>
+                </div>
             </div>
-        </div>
     </main>
-
     <?php
     include 'footer.php';
     ?>
