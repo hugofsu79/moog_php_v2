@@ -31,40 +31,53 @@ if (isset($_POST['adresse'])) {
     </ol>
 </nav>
 
-<h1 class="modal-title fs-5 text-light p-5" id="exampleModalLabel">Modifier mon adresse</h1>
-<div class="container">
-    <form action="./modifInfos.php" method="post">
 
-        <div class="row">
 
-            <div class="col">
-                <div class="form-group pb-2">
-                    <label for="adresse" style="color: white;">Adresse</label>
-                    <input type="text" required class="form-control" name="adresse" value="<?php echo $_SESSION['id_client']['adresse'] ?>">
+
+<body>
+
+    <main>
+
+        <h1 class="modal-title fs-5 text-light p-5" id="exampleModalLabel">Modifier mon adresse</h1>
+
+        <?php displayAddresses("changeAddress.php"); ?>
+
+        <div class="container mt-3 text-center">
+            <div class="container w-50 border border-dark bg-light mb-4 p-5 rounded-3">
+                <div class="row">
+                    <div class="co-md-12">
+                        <h3>Ajouter une nouvelle adresse</h3>
+                    </div>
+                    <div class="col">
+                        <form action="changeAddress.php" method="post">
+                            <div class="form-group mb-4">
+                                <label for="inputAddress" class="text-black">Adresse</label>
+                                <input name="address" type="text" class="form-control" id="inputAddress" placeholder="160 Broadway St." required>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="inputZip" class="text-black">Code Postal</label>
+                                    <input name="zipCode" type="text" class="form-control" id="inputZip" placeholder="28801" required>
+                                </div>
+                                <div class="form-group col  mb-4">
+                                    <label for="inputCity" class="text-black">Ville</label>
+                                    <input name="city" type="text" class="form-control" id="inputCity" placeholder="Asheville" required>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-2">
+                                <button type="submit" class="btn btn-dark" name="newAdress" value="newAdress">Valider</button>
+                            </div>
+                    </div>
                 </div>
+                </form>
             </div>
-
-
-            <div class="col">
-                <div class="form-group pb-2">
-                    <label for="code_postal" style="color: white;">Code postal</label>
-                    <input type="text" required class="form-control" name="code_postal" value="<?php echo $_SESSION['id_client']['code_postal'] ?>">
-                </div>
-            </div>
-
-
-            <div class="col">
-                <div class="form-group pb-2">
-                    <label for="ville" style="color: white;">Ville</label>
-                    <input type="text" required class="form-control" name="ville" value="<?php echo $_SESSION['id_client']['ville'] ?>">
-                </div>
-            </div>
-
         </div>
-        <button class="col-md-4 btn btn-outline-danger mb-5" type="submit" name="inscription" value="true">Modifier</button>
-    </form>
-</div>
 
-<?php
-include 'footer.php';
-?>
+
+    </main>
+
+    <?php
+    include('./footer.php');
+    ?>
+
+</body>

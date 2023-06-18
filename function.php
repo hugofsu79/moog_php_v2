@@ -500,3 +500,126 @@ function updatePassword()
         }
     }
 }
+
+// **************************************************** ADRESSES ***********************************************************
+
+
+// ***************** récupérer l'adresse du client en bdd ************************
+
+function getUserAdresses()
+{
+    $db = getConnection();
+
+    $query = $db->prepare('SELECT * FROM adresses WHERE id_client = ?');
+    $query->execute([$_SESSION['id']]);
+    return $query->fetchAll();
+}
+
+
+// ***************** définir / mettre à jour l'adresse de la session ************************
+
+function setSessionAddresses()
+{
+    $_SESSION['adresses'] = getUserAdresses();
+}
+
+
+// ***************** afficher formulaire modification adresse  ************************
+
+function displayAddresses($currentPage)
+{
+    $addresses = getUserAdresses();
+
+    foreach ($addresses as $address) {
+        echo "<div class=\"container p-5 w-50 border border-dark bg-light mb-4 p-4\">
+            <form action=\"" . $currentPage . "\" method=\"post\">
+                <input type=\"hidden\" name=\"addressChanged\">
+                <input type=\"hidden\" name=\"addressId\" value=\"" . htmlspecialchars($address['id']) . "\">
+                <div class=\"form-group\">
+                    <label for=\"inputAddress\">Adresse</label>
+                    <input name=\"address\" type=\"text\" class=\"form-control\" id=\"inputAddress\" value=\"" . htmlspecialchars($address['adresse']) . "\" required>
+                </div>
+                <div class=\"form-row\">
+                    <div class=\"form-group col-md-6\">
+                        <label for=\"inputZip\">Code Postal</label>
+                        <input name=\"zipCode\" type=\"text\" class=\"form-control\" id=\"inputZip\"  value=\"" . htmlspecialchars($address['code_postal']) . "\" required>
+                    </div>
+                    <div class=\"form-group col-md-6\">
+                        <label for=\"inputCity\">Ville</label>
+                        <input name=\"city\" type=\"text\" class=\"form-control\" id=\"inputCity\" value=\"" . htmlspecialchars($address['ville']) . "\" required>
+                    </div>
+                </div>
+                <div class=\"row justify-content-center mt-2\">
+                <button type=\"submit\" class=\"btn btn-dark\">Valider</button>
+                </div>
+            </form>
+        </div>";
+    }
+}
+
+
+// ***************** mettre à jour l'adresse sauvegardée  ************************
+
+function updateAddress()
+{
+    $db = getConnection();
+
+    $query = $db->prepare('UPDATE adresses SET adresse = :adresse, code_postal = :code_postal, ville = :ville WHERE id = :id');
+    $query->execute(array(
+        'adresse' =>  strip_tags($_POST['address']),
+        'code_postal' => strip_tags($_POST['zipCode']),
+        'ville' =>  strip_tags($_POST['city']),
+        'id' => strip_tags($_POST['addressId'])
+    ));
+
+    echo '<script>alert(\'Nouvelle adresse validée !\')</script>';
+}
+
+
+// *******************  Commande    *******************************
+
+
+
+// ***************** afficher le détail d'une commande  ************************
+
+function displayOrderArticles($orderArticles)
+{
+    echo "<table class=\"table\">
+    <thead>
+      <tr>
+        <th scope=\"col\">Article</th>
+        <th scope=\"col\">Prix</th>
+        <th scope=\"col\">Quantité</th>
+        <th scope=\"col\">Montant</th>
+      </tr>
+    </thead>
+    <tbody>";
+
+    // pour calculer les frais de port fixes (3€ * nombre de montres)
+    //$articlesQuantity = 0;
+
+    foreach ($orderArticles as $article) {
+
+        //$articlesQuantity += $article['quantite'];
+
+        echo "<tr>
+                <td>" . htmlspecialchars($article["nom"]) . "</td>
+                <td>" . htmlspecialchars($article["prix"]) . " € </td>
+                <td>" . htmlspecialchars($article["quantite"]) . "</td>
+                <td>" . htmlspecialchars($article["prix"]) * htmlspecialchars($article["quantite"]) . " €</td>
+              </tr>";
+    }
+}
+
+// ***************** récupérer les articles de chaque commande  ************************
+
+function getOrderArticles($orderId)
+{
+    $db = getConnection();
+    $query = $db->prepare('SELECT * FROM commande_articles AS ca 
+                            INNER JOIN articles AS a 
+                            ON a.id = ca.id_article 
+                            WHERE id_commande = ?');
+    $query->execute([$orderId]);
+    return $query->fetchAll();
+}

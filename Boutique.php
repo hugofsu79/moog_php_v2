@@ -25,56 +25,61 @@ include 'head.php';
     <div class="container">
         <div class="row justify-content">
             <div class="col pb-5">
-                <div id="carouselExampleFade" class="carousel slide carousel-fade">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="./Rscs/png/contact/Genereic Instagram_Factory-35.jpeg" class="d-block w-100" alt="...">
+
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade">
+                        <div class="carousel-inner rounded-1">
+                            <div class="carousel-item active">
+                                <img src="./Rscs/png/contact/Genereic Instagram_Factory-35.jpeg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./Rscs/png/contact/Grandmother Build-13.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./Rscs/png/contact/MoogFactory4.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./Rscs/png/contact/Grandmother Build-10_0.jpg" class="d-block w-100" alt="...">
+                            </div>
                         </div>
-                        <div class="carousel-item">
-                            <img src="./Rscs/png/contact/Grandmother Build-13.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./Rscs/png/contact/MoogFactory4.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./Rscs/png/contact/Grandmother Build-10_0.jpg" class="d-block w-100" alt="...">
-                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Précédent</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Suivant</span>
+                        </button>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Précédent</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Suivant</span>
-                    </button>
-                </div>
             </div>
-            <div class="col-2 col-md-auto text-white">
-                <div class="container">
-                    <div class="row">
-                        <div class="col md-1">
-                            <h2>Horaires du magasin</h2>
-                            <ul>
-                                <li>Lundi - Vendredi<br>10h – 16h</li>
-                                <li>Samedi<br>12h – 17h</li>
-                                <p class="pt-5"><b>160 Broadway St.<br>
-                                        Asheville, NC
-                                        28801</b>
-                                </p>
-                            </ul>
-                        </div>
-                        <div class="col md-12">
-                            <h2>Contacter </h2>
-                            <a href="mailto: tours@moogmusic.com">Veuillez contacter le magasin Moog pour organiser une visite.<br></a>
-                            <i class="fa-solid fa-coffee fa-2xl"></i><label for="phone" class="pt-5">828.239.0123</label>
-                        </div>
+            <div class="col text-white">
+                <div class="row">
+                    <div class="col md-1">
+                        <h2>Horaires du magasin</h2>
+                        <ul>
+                            <li>Lundi - Vendredi<br>10h – 16h</li>
+                            <li>Samedi<br>12h – 17h</li>
+                            <p class="pt-5"><b>160 Broadway St.<br>
+                                    Asheville, NC
+                                    28801</b>
+                            </p>
+                        </ul>
+                    </div>
+                    <div class="col md-12">
+                        <h2>Contacter </h2>
+                        <a href="mailto: tours@moogmusic.com">Veuillez contacter le magasin Moog pour organiser une visite.<br></a>
+                        <i class="fa-solid fa-coffee fa-2xl"></i><label for="phone" class="pt-3 pb-3">828.239.0123</label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 </body>
+
+
+
+
+
 <?php
 include 'footer.php';
 ?>

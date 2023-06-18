@@ -44,7 +44,7 @@ include 'head.php';
                 foreach (getArticlesByGamme($gamme['id']) as $article) {
 
                         echo
-                        "<div class=\"d-inline-flex col-md-3 p-2\"><div class=\"card\">
+                        "<div class=\"d-inline-flex p-2\" style=\"width: 5%\"><div class=\"card\">
                         <img class=\"m-2 rounded-1\" src=\"./Rscs/png/" . $article['image'] . "\">
                 <div class=\"card-body\">
                         <h5 class=\"card-title\">" . $article['nom'] . "</h5>
@@ -65,10 +65,6 @@ include 'head.php';
         } ?>
 </body>
 
-
-<?php
-var_dump($_SESSION);
-?>
 
 
 <?php

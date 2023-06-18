@@ -19,43 +19,14 @@
     <!-- Grid container -->
 
     <!-- Section: Text -->
-    <section class="mb-5 ml-5 p-5 text-center">
+    <section class="mb-5 ml-5 pt-3 pl-5 pr-5 text-center">
         <p style="color: white;">
-            Plongez dans l'univers captivant des synthétiseurs et ressentez la passion inextinguible qui animait l'âme de Robert Moog, tout comme elle animera vos compositions musicales, grâce à la magie des sons que vous pouvez créer.
+            Plongez dans l'univers captivant des synthétiseurs et ressentez la passion inextinguible qui animait l'âme de Robert Moog,<br> tout comme elle animera vos compositions musicales, grâce à la magie des sons que vous pouvez créer.
         </p>
     </section>
     <section>
         <!--Grid row-->
-        <div href="container-fluid text-center">
-            <div class="row text-center">
-                <!--Grid column-->
-                <div class="col-md-3">
-                    <p class="pt-2">
-                        <strong style="color: white;">Inscrivez-vous à notre newsletter</strong>
-                    </p>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col">
-                    <!-- Email input -->
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-outline ml-5 mr-5">
-                                <input type="email" id="email" class="form-control text-light" pattern="tours@moogmusic.com" />
-                                <label class="form-label" for="form5Example21" style="color: white opacity-25;">Adresse e-mail</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn btn-outline-light">
-                                S'abonner
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Grid column-->
-        </div>
+        
     </section>
 
 
