@@ -26,8 +26,8 @@ if (isset($_POST['nom'])) {
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb p-2">
-    <li class="breadcrumb-item"><a href="./mon_compte.php">Mon compte</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Modifier mes infos</li>
+    <li class="breadcrumb-item text-light"><a href="./mon_compte.php">Mon compte</a></li>
+    <li class="breadcrumb-item active text-light" aria-current="page">Modifier mes infos</li>
   </ol>
 </nav>
 

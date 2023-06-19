@@ -30,51 +30,63 @@ if (isset($_POST['deconnection()'])) {
 
 
   <main>
+
+  <!-- *************************** Image ***************** -->
     <div class="container text-center">
       <div class="row">
         <img id="watchPhoto" src="./Rscs/png/mur_sonore.png" class="rounded-1 pt-4"></img>
       </div>
     </div>
 
-    <?php
+  <h1>Les produits</h1>
+  <!-- *************************** Carde ***************** -->
+
+    <div class="container text-center p-5">
+      <div class="row g-2">
+
+        <?php
 
 
-    $articles = getArticles();
+        $articles = getArticles();
 
 
-    //  var_dump(getArticles());
-    // Je lance ma blouce pour afficher une carte bootstrap par article
-    foreach ($articles as $article) {
-      
+        //  var_dump(getArticles());
+        // Je lance ma blouce pour afficher une carte bootstrap par article
+        foreach ($articles as $article) {
 
 
-      echo "
-      <div class=\"container text-center m-3\">
-          <div class=\"row\">
-          <div class=\"col\">
-    <div class=\"card\" style=\"width: 18rem;\">
-      <img src=\"./Rscs/png/" . $article['image'] . "\">
-      <div class=\"card-body\">
+          echo "
+    
+    <div class=\"col-6 card text-center\">
+    <div class=\"card-body \">
+      <img class=\"w-75\" src=\"./Rscs/png/" . $article['image'] . "\">
         <h5 class=\"card-title\">" . $article['nom'] . "</h5>
         <p class=\"card-text\">" . $article['description'] . "</p>
         <form method=\"GET\" action=\"./produit.php\">
           <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-          <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
             <input type=\"submit\" class=\"btn btn-dark\" value=\"Détails produit\">
         </form>
-      </div>
-      </div>
-    </div>
+
         <form method=\"GET\" action=\"./panier.php\">
-        </form>
+        <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
+          <input type=\"submit\" class=\"btn btn-danger mt-2\" value=\"Ajouter au panier\">
+      </form>
       </div>
     </div>";
-    }
-    ?>
+        }
 
-    }
+        ?>
 
+      </div>
+    </div>
+
+
+
+
+    
   </main>
+  
+
 </body>
 
 <?php

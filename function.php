@@ -158,7 +158,7 @@ function fraisDeLivraison()
 {
     $frais = 0; // Montant des frais de livraison
     foreach ($_SESSION['panier'] as $article) {
-        $frais += $article['quantite'] * 3;
+        $frais += $article['quantite'] * 10;
     }
     return $frais;
 }
@@ -360,20 +360,7 @@ function inscription()
     }
 }
 
-//Créer une nouvelle adresse
 
-function creatAddress($user_id)
-{
-    $db = getConnection();
-
-    $query = $db->prepare('INSERT INTO adresses (id_client, adresse, code_postal, ville) VALUES(:id_client, :adresse, :code_postal, :ville)');
-    $query->execute(array(
-        'id_client' => $user_id,
-        'adresse' => strip_tags($_POST['adresse']),
-        'code_postal' => strip_tags($_POST['code_postal']),
-        'ville' => strip_tags($_POST['ville']),
-    ));
-}
 
 //******************     Informations de connexion à la base de données     *************************
 
@@ -404,6 +391,18 @@ function deconnection()
 
 
 
+// *******************  Connexion    *******************************
+
+
+function logOut()
+{
+    $_SESSION = array();
+    echo '<script>alert(\'Vous avez bien été déconnecté !\')</script>';
+}
+
+
+
+
 //******************     Modifier Profil    *************************
 
 function modifInfo()
@@ -428,38 +427,6 @@ function modifInfo()
 
 
             echo "<script> alert(\"modification validée\")</script>";
-        }
-    }
-}
-
-
-
-//******************     Modifier adresse    *************************
-
-function modifAdresse()
-{
-    if (checkEmptyFields() == true) {
-        echo "<script> alert(\"erreure, un ou plusieurs champs vides\"); </script>";
-    } else {
-        if (checkInputsLenght() == false) {
-            echo "<script> alert(\"erreure,Les longueures ne sont pas bonnes\"); </script>";
-        } else {
-            $db = getConnection();
-            $query = $db->prepare('UPDATE adresses SET adresse=:adresse, code_postal=:code_postal, ville=:ville WHERE id_client=:id_client');
-            $query->execute([
-                'adresse' => $_POST['adresse'],
-                'code_postal' => $_POST['code_postal'],
-                'ville' => $_POST['ville'],
-                'id_client' => $_SESSION['client']['id'],
-            ]);
-
-
-            $_SESSION['client']['adresse'] = $_POST['adresse'];
-            $_SESSION['client']['code_postal'] = $_POST['code_postal'];
-            $_SESSION['client']['ville'] = $_POST['ville'];
-
-
-            echo "<script> alert(\"Adresse modifiée\")</script>";
         }
     }
 }
@@ -502,6 +469,54 @@ function updatePassword()
 }
 
 // **************************************************** ADRESSES ***********************************************************
+
+
+//Créer une nouvelle adresse
+
+function creatAddress($user_id)
+{
+    $db = getConnection();
+
+    $query = $db->prepare('INSERT INTO adresses (id_client, adresse, code_postal, ville) VALUES(:id_client, :adresse, :code_postal, :ville)');
+    $query->execute(array(
+        'id_client' => $user_id,
+        'adresse' => strip_tags($_POST['adresse']),
+        'code_postal' => strip_tags($_POST['code_postal']),
+        'ville' => strip_tags($_POST['ville']),
+    ));
+}
+
+
+//******************     Modifier adresse    *************************
+
+function modifAdresse()
+{
+    if (checkEmptyFields() == true) {
+        echo "<script> alert(\"erreure, un ou plusieurs champs vides\"); </script>";
+    } else {
+        if (checkInputsLenght() == false) {
+            echo "<script> alert(\"erreure,Les longueures ne sont pas bonnes\"); </script>";
+        } else {
+            $db = getConnection();
+            $query = $db->prepare('UPDATE adresses SET adresse=:adresse, code_postal=:code_postal, ville=:ville WHERE id_client=:id_client');
+            $query->execute([
+                'adresse' => $_POST['adresse'],
+                'code_postal' => $_POST['code_postal'],
+                'ville' => $_POST['ville'],
+                'id_client' => $_SESSION['client']['id'],
+            ]);
+
+
+            $_SESSION['client']['adresse'] = $_POST['adresse'];
+            $_SESSION['client']['code_postal'] = $_POST['code_postal'];
+            $_SESSION['client']['ville'] = $_POST['ville'];
+
+
+            echo "<script> alert(\"Adresse modifiée\")</script>";
+        }
+    }
+}
+
 
 
 // ***************** récupérer l'adresse du client en bdd ************************
@@ -611,15 +626,31 @@ function displayOrderArticles($orderArticles)
     }
 }
 
-// ***************** récupérer les articles de chaque commande  ************************
+// ***************** récupérer les articles  ************************
 
 function getOrderArticles($orderId)
 {
     $db = getConnection();
     $query = $db->prepare('SELECT * FROM commande_articles AS ca 
                             INNER JOIN articles AS a 
-                            ON a.id = ca.id_article 
+                            ON ca.id_article = a.id
                             WHERE id_commande = ?');
     $query->execute([$orderId]);
     return $query->fetchAll();
 }
+
+
+
+
+
+// // function $id ()
+// {
+
+//     $query = $db->prepare('SELECT * FROM commande_articles AS ca
+//                                     INNER JOINT articles AS a
+//                                     ON ca.id_article = a.id
+//                                     WHERE id_commande = ?');
+//                                     return $query -> fetchALL;
+// }
+
+?>

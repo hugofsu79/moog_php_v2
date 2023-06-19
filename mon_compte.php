@@ -23,11 +23,12 @@ include 'head.php';
 
 
         ?>
+        
         <h1>Mon compte</h1>
 
         <div class="container text-center pb-5">
-            <div class="row">
-                <div class="col">
+            <div class="row align-items-start g-2">
+                <div class="col-3 text-center">
                     <a href="./modifInfos.php"><button type="button" class="btn btn-light">
                             <p class="fs-1 fw-bold mb-5">&#8505;<br></p>
                             Modifier mes information
@@ -54,6 +55,15 @@ include 'head.php';
             </div>
         </div>
 
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                The current link item
+            </a>
+            <a type="button" class="list-group-item list-group-item-action">A second link item</a>
+            <a type="button" class="list-group-item list-group-item-action">A third link item</a>
+            <a type="button" class="list-group-item list-group-item-action">A fourth link item</a>
+            <a class="list-group-item list-group-item-action disabled">A disabled link item</a>
+        </div>
     </main>
     <?php
     include 'footer.php';

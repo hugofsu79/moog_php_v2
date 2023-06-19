@@ -1,6 +1,4 @@
 <header>
-
-
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="./index.php">
@@ -22,29 +20,26 @@
           </li>
         </ul>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <?php if (isset($_SESSION['client']['id'])) { ?>
-            <li class="nav-item">
-              <div class="dropdown">
-                <button class="btn btn-light dropdown-toggle pr-5" data-bs-toggle="dropdown" aria-expanded="false">
-                  <?php if (isset($_SESSION['client']['id'])) { ?>
-                    <p>&#127772;<?= $_SESSION['client']['prenom'] ?>
-                    </p>
-                  <?php }
-                  ?>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-light">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="inscriptionconnexion" href="./mon_compte.php">Mon compte</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-item"><?php } else {
-                                        echo "<a href=\"./inscription.php\">connexion/inscription</a>";
-                                      } ?></a>
-                    </form>
-                    </li>
-                </ul>
-              </div>
-            </li>
+          <li class="nav-item">
+            <div class="dropdown">
+              <?php
+              if (!isset($_SESSION['id']) && isset($_SESSION['prenom']) && isset($_SESSION['nom'])) {  // si l'utilisateur n'est pas connecté
+                echo "<li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"connection.php\">Connexion / créer compte</a>
+                          </li>";
+              } else {
+                echo "<li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"mon_comptex.php\">Mon compte</a>
+                          </li>
+                          <li class=\"nav-item\">
+                            <form action=\"index.php\" method=\"post\" class=\"nav-link\">
+                              <input type=\"hidden\" name=\"logout\">
+                              <input class=\"bg-light\" style=\"border: none\" type=\"submit\" value=\"Déconnexion\">
+                            </form>
+                          </li>";
+              } ?>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
