@@ -70,6 +70,35 @@ include 'header.php';
     }
     ?>
 
+
+    <?php
+
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = array();
+    }
+
+    if (isset($_POST['chosenArticle'])) {
+
+        $chosenArticleId = $_POST['chosenArticle'];
+        $article = getArticleFromId($chosenArticleId);
+        addToCart($article);
+    }
+
+    if (isset($_POST['deletedArticle'])) {
+        $deletedArticleId = $_POST['deletedArticle'];
+        removeToCart($deletedArticleId);
+    }
+
+    if (isset($_POST['modifiedArticleId'])) {
+        updateQuantity();
+    }
+
+    if (isset($_POST['emptyCart']) && $_POST['emptyCart'] == true) {
+        viderPanier($showConfirmation = true);
+    }
+    ?>
+
 </main>
 <div class="container text-center">
     <div class="card">
@@ -159,33 +188,12 @@ include 'header.php';
                                     Montant total : <?= fraisDeLivraison() + totalArticles() ?> €
                                 </div>
                                 <div class="modal-body">
-                                    Vous venez un de vous procurer un ticket pour explorer des horizons musicaux infinis.
+                                    Vous venez de vous procurer un ticket pour explorer des horizons musicaux infinis.
                                 </div>
                                 <div class="modal-footer">
                                     <form method="POST" action="./panier.php">
                                         <button type="submit" class="btn btn-outline-danger" name="retourAlaccueil">Retour à l'accueil</button>
                                     </form>
-                                    // **** obtenir et afficher la date du jour formatée ****
-                                    $dateJour = date("d-m-Y");
-                                    echo $dateJour;
-                                    ?> </p>
-                                    // **** obtenir et afficher la date du jour formatée ****
-                                    $dateJour = date("d-m-Y");
-                                    echo $dateJour;
-                                    ?> </p>
-                                    <p>Livraison estimée le
-                                        <?php
-                                        // ********************* calcul : date du jour + 3 jours *****************
-                                        // je récupère la date du jour en format DateTime (exigé par la fonction date_add)
-                                        $date = new DateTime("now");
-                                        // on utilise date_add pour ajouter 3 jours
-                                        // date_interval... => permet d'obtenir l'intervalle de temps souhaité pour l'ajouter
-                                        date_add($date, date_interval_create_from_date_string("3 days"));
-                                        // à ce stade, $date est directement modifiée
-                                        // je l'affiche en la formatant : jour mois année => 09-06-2023
-                                        echo date_format($date, "d-m-Y");
-                                        ?>
-                                    </p>
                                 </div>
                             </div>
                         </div>

@@ -174,6 +174,20 @@ function totalArticles()
 }
 
 
+// ****************** enlever un article au panier **********************
+
+function removeToCart($articleId)
+{
+
+    for ($i = 0; $i < count($_SESSION['cart']); $i++) {
+        if ($_SESSION['cart'][$i]['id'] == $articleId) {
+            array_splice($_SESSION['cart'], $i, 1);
+        }
+    }
+    echo "<script> alert(\"Article retiré du panier\");</script>";
+}
+
+
 function retourAlaccueil()
 {
     $_SESSION['panier'] = [];
@@ -486,7 +500,22 @@ function creatAddress($user_id)
     ));
 }
 
+// ****************** calculer le total du panier **********************
 
+function getCartTotal()
+{
+    $cartTotal = 0;
+
+    if (isset($_SESSION['cart']) && count($_SESSION['cart']) !== 0) {
+
+        foreach ($_SESSION['cart'] as $article) {
+            $cartTotal += $article['prix'] * $article['quantity'];
+        }
+        return $cartTotal;
+    } else {
+        echo "Votre panier est vide !";
+    }
+}
 //******************     Modifier adresse    *************************
 
 function modifAdresse()
@@ -788,7 +817,52 @@ function getUserAdresses()
     return $query->fetchAll();
 }
 
+// ************ afficher le contenu du panier ***********
 
+function showCartContent($pageName)
+{
+    foreach ($_SESSION['cart'] as $chosenArticle) {
+        echo "<div class=\"row text-center text-light align-items-center bg-dark p-3 justify-content-around mb-1\">
+                        <img class=\"col-md-2\" style=\"width: 150px\" src=\"images/" . htmlspecialchars($chosenArticle['image']) . "\">
+                        <p class=\"font-weight-bold col-md-2\">" . htmlspecialchars($chosenArticle['nom']) . "</p>
+                        <p class=\"col-md-2\">" . htmlspecialchars($chosenArticle['description']) . "</p>
+                        <p class=\"col-md-2\">" . htmlspecialchars($chosenArticle['prix']) . " €</p>
+
+                        <form class=\"col-lg-3\" action=\"" . $pageName . "\" method=\"post\">
+                            <div class=\"row pt-2\">
+                            <input type=\"hidden\" name=\"modifiedArticleId\" value=\"" . htmlspecialchars($chosenArticle['id']) . "\">
+                            <input class=\"col-2 offset-2\" type=\"text\" name=\"newQuantity\" value=\"" . htmlspecialchars($chosenArticle['quantity']) . "\">
+                            <button type=\"submit\" class=\"col-5 offset-1 btn btn-light\">
+                                Modifier quantité
+                            </button>
+                            </div>
+                        </form>
+
+                        <form class=\"col-lg-1\" action=\"" . $pageName . "\" method=\"post\">
+                            <input type=\"hidden\" name=\"deletedArticle\" value=\"" . htmlspecialchars($chosenArticle['id']) . "\">
+                            <button type=\"submit\" class=\"btn btn-dark\">
+                                <i class=\"fas fa-ban\"></i>
+                            </button>
+                        </form>
+                    </div>";
+    }
+}
+
+
+// ****************** calculer le montant total de la commande **********************
+
+function calculateTotalPrice()
+{
+    // version avec frais de port "fixes" par articles
+    // return getCartTotal() + calculateShippingFees();
+
+    // version avec choix entre domicile et point-relais
+    if ($_SESSION['delivery'] == "domicile") {
+        return getCartTotal() + 10;
+    } else {
+        return getCartTotal() + 5;
+    }
+}
 // ********************************** SAUVEGARDE COMMANDE *********************************************
 
 function saveOrder($totalPrice)
