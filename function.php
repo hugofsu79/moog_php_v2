@@ -45,10 +45,10 @@ function getArticles()
 
 
 
-
 // *************** Recupérer un article à partir de son id *************** 
 
 function getArticleFromId($id)
+
 {
     $db = getConnection(); // Je me connect à la bdd
 
@@ -436,7 +436,7 @@ function modifInfo()
 //WHERE client_id
 
 
-function updatePassword()
+function modifMotDePasse()
 {
     if (checkEmptyFields() == true) {
         echo "<script> alert(\"erreure, un ou plusieurs champs vides\"); </script>";
@@ -519,17 +519,6 @@ function modifAdresse()
 
 
 
-// ***************** récupérer l'adresse du client en bdd ************************
-
-function getUserAdresses()
-{
-    $db = getConnection();
-
-    $query = $db->prepare('SELECT * FROM adresses WHERE id_client = ?');
-    $query->execute([$_SESSION['id']]);
-    return $query->fetchAll();
-}
-
 
 // ***************** définir / mettre à jour l'adresse de la session ************************
 
@@ -601,12 +590,12 @@ function displayOrderArticles($orderArticles)
 {
     echo "<table class=\"table\">
     <thead>
-      <tr>
+    <tr>
         <th scope=\"col\">Article</th>
         <th scope=\"col\">Prix</th>
         <th scope=\"col\">Quantité</th>
         <th scope=\"col\">Montant</th>
-      </tr>
+    </tr>
     </thead>
     <tbody>";
 
@@ -640,6 +629,15 @@ function getOrderArticles($orderId)
 }
 
 
+// ***************** récupérer la liste des commandes  ************************
+
+function getOrders()
+{
+    $db = getConnection();
+    $query = $db->prepare('SELECT * FROM commandes WHERE id_client = ? ORDER BY date_commande DESC');
+    $query->execute([$_SESSION['id']]);
+    return $query->fetchAll();
+}
 
 
 
@@ -653,4 +651,368 @@ function getOrderArticles($orderId)
 //                                     return $query -> fetchALL;
 // }
 
-?>
+
+
+
+
+
+// ****************** récupérer la liste des articles par gamme **********************
+
+function getArticlesByRange($rangeId)
+{
+    $db = getConnection();
+    $query = $db->prepare('SELECT * FROM Articles WHERE id_gamme = :id_gamme');
+    $query->execute(array(
+        'id_gamme' => $rangeId
+    ));
+    return $query->fetchAll();
+}
+
+
+// *************************************** afficher le stock d'un article ***************************************
+
+function displayStock($stock)
+{
+    if ($stock >= 10) {
+        return "<p class=\"w-75 card-text m-auto rounded p-1 text-white bg-success\">En stock</p>";
+    } else if ($stock > 0) {
+        return "<p class=\"w-75 card-text m-auto rounded p-1 bg-warning\">Plus que <b>" . $stock . "</b> en stock</p>";
+    } else {
+        return "<p class=\"w-75 card-text m-auto rounded p-1 text-light bg-danger\">Article épuisé</p>";
+    }
+}
+
+
+// ****************** afficher les gammes **********************
+
+
+function showRanges($ranges)
+{
+    foreach ($ranges as $range) {
+        echo "<div class=\"container w-75 border border-dark bg-light\">
+                <div class=\"row p-3 justify-content-center\"><h4>" . htmlspecialchars($range['nom']) . "</h4></div>
+            </div>";
+
+        $rangeArticles = getArticlesByRange(intval($range['id']));
+
+        echo "<div class=\"container p-5\">
+                <div class=\"row text-center justify-content-center\">";
+
+        showArticles($rangeArticles);
+
+        echo "</div>
+            </div>";
+    }
+}
+
+function recupCommandes()
+{
+    $db = getConnection(); // Je me connect à la bdd
+
+    // /!\ JAMAIS DE VARIABLE PHP DIRECTEMENT DANS UNE REQUETTE /!\(RISQUE D'INJECTION SQL)
+    // Je mets en place une requête pr&parée
+
+    $query = $db->prepare('SELECT * FROM commandes WHERE id_client = ?'); //Je prépare ma requète 
+    // $query->execute([$_SESSION['client']['id']]); 
+    return $query->fetchAll(); // quand il y a 1 resultat possible il n'est pas obligé de faire un fetchAll, ainsi on a directemnt l'élément souhaité
+}
+
+// ***************** afficher la liste des commandes  ************************
+
+function displayOrders()
+{
+    $orders = getOrders();
+
+    if (count($orders) == 0) {
+        echo "<p>Vous n'avez pas encore passé de commande !</p>";
+    } else {
+        echo "<table class=\"table  table-striped\">
+    <thead class=\"thead-dark\">
+    <tr>
+        <th scope=\"col\">Numéro</th>
+        <th scope=\"col\">Date</th>
+        <th scope=\"col\">Montant</th>
+        <th scope=\"col\">Détails</th>
+    </tr>
+    </thead>
+    <tbody>";
+
+        foreach ($orders as $order) {
+
+            echo "<tr>
+                <td>" . htmlspecialchars($order["numero"]) . "</td>
+                <td>" . htmlspecialchars($order["date_commande"]) . "</td>
+                <td>" . htmlspecialchars($order["prix"]) . " €</td>
+                <td>
+                    <form action=\"orderDetails.php\" method=\"post\">
+                        <input type=\"hidden\" name=\"orderId\" value=\"" . htmlspecialchars($order["id"]) . "\">
+                        <input type=\"hidden\" name=\"orderNumber\" value=\"" . htmlspecialchars($order["numero"]) . "\">
+                        <input type=\"hidden\" name=\"orderTotal\" value=\"" . htmlspecialchars($order["prix"]) . "\">
+                        <input type=\"hidden\" name=\"orderDate\" value=\"" . htmlspecialchars($order["date_commande"]) . "\">
+                        <input type=\"hidden\" name=\"livraison\" value=\"" . htmlspecialchars($order["livraison"]) . "\">
+                        <button type=\"submit\"  class=\"btn btn-dark\">Détails</button>
+                    </form>
+                </td>
+            </tr>";
+        }
+        echo "</tr>
+        </td>
+        </tr>";
+
+        echo "</tbody>
+    </table>";
+    }
+}
+
+// ****************** récupérer les gammes en bdd **********************
+
+function getRanges()
+{
+    $db = getConnection();
+    $query = $db->query('SELECT * FROM gammes');
+    return $query->fetchAll();
+}
+
+// ***************** récupérer la liste des commandes en bdd ************************
+
+
+
+// ***************** récupérer l'adresse du client en bdd ************************
+
+function getUserAdresses()
+{
+    $db = getConnection();
+
+    $query = $db->prepare('SELECT * FROM adresses WHERE id_client = ?');
+    // $query->execute([$_SESSION['id']]);
+    return $query->fetchAll();
+}
+
+
+// ********************************** SAUVEGARDE COMMANDE *********************************************
+
+function saveOrder($totalPrice)
+{
+    $db = getConnection();
+
+    $query = $db->prepare('INSERT INTO commandes (id_client, numero, date_commande, prix, livraison, id_adresse) VALUES(:id_client, :numero, :date_commande, :prix, :livraison, :id_adresse)');
+
+    $query->execute(array(
+        'id_client' => $_SESSION['id'],
+        'numero' => rand(1000000, 9999999),
+        'date_commande' => date("d-m-Y h:i:s"),
+        'prix' => $totalPrice,
+        'livraison' => $_SESSION['delivery'],
+        'id_adresse' => $_SESSION['deliveryAddress']['id']
+    ));
+
+    $id = $db->lastInsertId();
+
+    $query = $db->prepare('INSERT INTO commande_articles (id_commande, id_article, quantite) VALUES(:id_commande, :id_article, :quantity)');
+
+    foreach ($_SESSION['cart'] as $article) {
+
+        $query->execute(array(
+            'id_commande' => $id,
+            'id_article' => $article['id'],
+            'quantity' => $article['quantity']
+        ));
+
+        decreaseStock($article['stock'], $article['quantity'], $article['id']);
+    }
+}
+
+
+// ******************************** déduire des stocks le nombre d'articles achetés ********************************
+
+function decreaseStock($stock, $orderedQuantity, $id)
+{
+    $db = getConnection();
+
+    $stock = intval($stock);
+    $newStock = $stock - $orderedQuantity;
+
+    if ($newStock < 0) {
+        $newStock = 0;
+    }
+
+    $query = $db->prepare('UPDATE articles SET stock = :newStock WHERE id = :id');
+    $query->execute(array(
+        'newStock' => $newStock,
+        'id' => $id
+    ));
+}
+
+
+// *****************récupération des articles pour le détail commande **********************//
+
+function recupArticlesCommande()
+{
+    //je me connecte à la bdd
+    $db = getConnection();
+    //je récupère les articles de chaque commande en faisant un INNER JOIN
+    $query = $db->prepare('SELECT * FROM commande_articles as ca
+INNER JOIN articles as a
+ON ca.id article = a.id
+WHERE id _commande = ?');
+
+    //Je l'exécute avec le bon paramtère
+    $query->execute([$_POST[' commandeId']]);
+    // retourne la commande sous forme de tableau associatif
+    return $query->fetchAll();
+}
+
+
+
+
+// ****************** afficher l'ensemble des articles **********************
+
+function showArticles($articles)
+{
+    foreach ($articles as $article) {
+        echo "<div class=\"card col-md-5 col-lg-3 p-3 m-3\" style=\"width: 18rem;\">
+                <img class=\"card-img-top\" src=\"images/" . htmlspecialchars($article['image']) . "\" alt=\"Card image cap\">
+                <div class=\"card-body\">
+                    <h5 class=\"card-title font-weight-bold\">" . htmlspecialchars($article['nom']) . "</h5>
+                    <p class=\"card-text font-italic\">" . strip_tags($article['description']) . "</p>
+                    <p class=\"card-text font-weight-light\">" . htmlspecialchars($article['prix']) . " €</p>
+                    " . displayStock(htmlspecialchars($article['stock'])) . "
+                    <form action=\"product.php\" method=\"post\">
+                        <input type=\"hidden\" name=\"articleToDisplay\" value=\"" . htmlspecialchars($article['id']) . "\">
+                        <input class=\"btn btn-light\" type=\"submit\" value=\"Détails produit\">
+                    </form>";
+        if ($article['stock'] > 0) {
+            echo "<form action=\"panier.php\" method=\"post\">
+                        <input type=\"hidden\" name=\"chosenArticle\" value=\"" . htmlspecialchars($article['id']) . "\">
+                        <input class=\"btn btn-dark mt-2\" type=\"submit\" value=\"Ajouter au panier\">
+                </form>";
+        }
+        echo "</div>
+            </div>";
+    }
+}
+
+
+// ************************ afficher formulaire infos client *****************************
+
+function displayInformations($currentPage)
+{
+    echo "<div class=\"container p-5\">
+            <div class=\"row text-center justify-content-center\">
+                <div class=\"col\">
+                        <div class=\"container border border-dark bg-light mb-4 p-5\">
+                            <form action=\"" . $currentPage . "\" method=\"post\">
+                                <input type=\"hidden\" name=\"userModified\" value=\"true\">
+                                <input type=\"hidden\" name=\"clientId\" value=\"" . $_SESSION['id'] . "\">
+                                <div class=\"form-row\">
+                                    <div class=\"form-group col-md-12\">
+                                        <label for=\"inputFirstName\">Prénom</label>
+                                        <input name=\"firstName\" type=\"text\" class=\"form-control\" id=\"inputFirstName\" 
+                                        value=\"" . htmlspecialchars($_SESSION['prenom']) . "\" required>
+                                    </div>
+                                    <div class=\"form-group col-md-12\">
+                                        <label for=\"inputName\">Nom</label>
+                                        <input name=\"lastName\" type=\"text\" class=\"form-control\" id=\"inputName\" 
+                                        value=\"" . htmlspecialchars($_SESSION['nom']) . "\" required>
+                                    </div>
+                                </div>
+                                <div class=\"form-row justify-content-center\">
+                                    <div class=\"form-group col-md-12\">
+                                        <label for=\"inputEmail\">Email</label>
+                                        <input name=\"email\" type=\"email\" class=\"form-control mb-5\" id=\"inputEmail\" 
+                                        value=\"" . htmlspecialchars($_SESSION['email']) . "\" required>
+                                    </div>
+                                </div>
+                                <div class=\"row justify-content-center mt-2\">
+                                    <button type=\"submit\" class=\"btn btn-danger\">Valider les changements</button>
+                                </div>
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>";
+}
+
+// ************************ mettre à jour les informations  *****************************
+
+function updateUser()
+{
+    if (!checkEmptyFields()) {
+
+        $db = getConnection();
+
+        $firstName = strip_tags($_POST['firstName']);
+        $lastName = strip_tags($_POST['lastName']);
+        $email = strip_tags($_POST['email']);
+        $id = strip_tags($_POST['clientId']);
+
+        $query = $db->prepare('UPDATE clients SET prenom = :prenom, nom = :nom, email = :email WHERE id = :id');
+        $query->execute(array(
+            'prenom' =>  $firstName,
+            'nom' => $lastName,
+            'email' => $email,
+            'id' => $id
+        ));
+
+        $_SESSION['prenom'] = $firstName;
+        $_SESSION['nom'] = $lastName;
+        $_SESSION['email'] = $email;
+
+        echo '<script>alert(\'Changements validés !\')</script>';
+    } else {
+        echo '<script>alert(\'Attention : un ou plusieurs champs vides !\')</script>';
+    }
+}
+
+
+// ************************ modifier le mot de passe  *****************************
+
+function updatePassword()
+{
+    if (!checkEmptyFields()) {  // on vérifie d'abord si il n'y a pas de champs vides. Si oui, message d'erreur et fin de la fonction.
+
+        $oldPasswordDatabase = getUserPassword();   // on récupère le mdp actuel en base
+        $oldPasswordDatabase = $oldPasswordDatabase['mot_de_passe'];
+
+        // on vérifie le mdp actuel saisi par rapport à l'actuel en base
+        $isPasswordCorrect = password_verify(strip_tags($_POST['oldPassword']), $oldPasswordDatabase);
+
+        // si mdp actuel saisi = mdp actuel en base, on passe à la suite. Sinon fin de la fonction et message d'erreur
+        if ($isPasswordCorrect) {
+
+            // on nettoie le nouveau mdp choisi
+            $newPassword = strip_tags($_POST['newPassword']);
+
+            // on vérifie que le nouveau mdp choisi respecte la regex. Si pas bon => sortie et message d'erreur
+            if (checkPassword($newPassword)) {
+
+                //si nouveau mdp ok => on le sauvegarde en le hâchant avec password_hash()
+                $db = getConnection();
+                $query = $db->prepare('UPDATE clients SET mot_de_passe = :newPassword WHERE id = :id');
+                $query->execute(array(
+                    'newPassword' => password_hash($newPassword, PASSWORD_DEFAULT),
+                    'id' => $_SESSION['id']
+                ));
+
+                echo "<script>alert(\"Mot de passe modifié avec succès\")</script>";
+            } else {
+                echo "<script>alert(\"Attention : sécurité du mot de passe insuffisante ! \")</script>";
+            };
+        } else {
+            echo "<script>alert(\"Erreur : l'ancien mot de passe saisi est incorrect\")</script>";
+        }
+    } else {
+        echo "<script>alert(\"Attention : un ou plusieurs champs vides ! \")</script>";
+    }
+}
+
+// ************************ récupérer le mot de passe en bdd*****************************
+
+function getUserPassword()
+{
+
+    $db = getConnection();
+    $query = $db->prepare('SELECT mot_de_passe FROM clients WHERE id = ?');
+    $query->execute(array($_SESSION['id']));
+    return $query->fetch();
+}

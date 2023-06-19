@@ -26,13 +26,13 @@ include 'head.php';
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="./mon_compte.php">Mon compte</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Modifier mot de passe</li>
+                <li class="breadcrumb-item active text-light" aria-current="page">Modifier mot de passe</li>
             </ol>
         </nav>
 
         <?php
         if (isset($_POST['newPassword'])) {
-            updatePassword();
+            modifMotDePasse();
         }
         ?>
 
@@ -49,8 +49,8 @@ include 'head.php';
                             <div class="p-3">
                                 <form action="./change_Passeword.php" method="post">
                                     <input type="hidden" name="passwordModified" value="true">
-                                    <div class="form-row text-center justify-content-center">
-                                        <div class="form-group col-md-6">
+                                    <div class="form-row justify-content-center">
+                                        <div class="form-group col-md-8">
                                             <label for="inputPassword" class="text-dark">Ancien mot de passe</label>
                                             <input name="oldPassword" type="password" class="form-control" id="inputPassword" placeholder="ancienmotdepasse" required>
                                         </div>

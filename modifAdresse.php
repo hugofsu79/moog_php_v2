@@ -27,7 +27,7 @@ if (isset($_POST['adresse'])) {
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="./mon_compte.php">Mon compte</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Modifier l'adresse</li>
+        <li class="breadcrumb-item active text-light" aria-current="page">Modifier l'adresse</li>
     </ol>
 </nav>
 
@@ -38,7 +38,7 @@ if (isset($_POST['adresse'])) {
 
     <main>
 
-        <h1 class="modal-title fs-5 text-light p-5" id="exampleModalLabel">Modifier mon adresse</h1>
+        <h1 class="modal-title fs-3 text-light p-3" id="exampleModalLabel">Modifier mon adresse</h1>
 
         <?php displayAddresses("changeAddress.php"); ?>
 

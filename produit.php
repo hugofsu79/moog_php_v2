@@ -24,7 +24,7 @@ include 'header.php';
 <body>
 
 
-    <main class="pb-5">
+    <main class="pb-5 pt-5">
         <div class="container text-center bg-white">
             <?php
             //1) Récupérer l'id transmis par le formulaire
@@ -57,7 +57,7 @@ include 'header.php';
                         </div>
                     </div>
                     <div class="col">
-                        <img src=" ./Rscs/png/<?= $article['image'] ?>" class="object-fit-none img-fluid rounded" alt="Shopping item" style="margin-bottom: 2em" ;>
+                        <img src=" ./Rscs/png/<?= $article['image'] ?>" class="img-fluid rounded-2 p-4" alt="Shopping item" ;>
                     </div>
                 </div>
             </div>

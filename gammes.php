@@ -1,12 +1,12 @@
 <?php
-        include 'header.php';
+include 'header.php';
 
-        // Pour initialiser le panier 
-        // createCart();
-        // var_dump($_SESSION);
+// Pour initialiser le panier 
+// createCart();
+// var_dump($_SESSION);
 
 
-        ?>
+?>
 
 <?php
 // inclure le fichier des fonctions pour pouvoir les appeler ici
@@ -24,36 +24,34 @@ include 'head.php';
 
 <body>
 
+        <main>
+                <?php
+
+                // Pour initialiser le panier 
+                // createCart();
+                // var_dump($_SESSION);
 
 
-        <?php
+                //1
+                $gammes = getGammes();
+                //2
+                foreach ($gammes as $gamme) {
+                        echo "<h1>" . $gamme['nom'] . "</h1>";
+                        echo "<div class=\"container\">
+                <div class=\"row\">";
+                        foreach (getArticlesByGamme($gamme['id']) as $article) {
 
-        // Pour initialiser le panier 
-        // createCart();
-        // var_dump($_SESSION);
-
-
-        //1
-        $gammes = getGammes();
-        //2
-        foreach ($gammes as $gamme) {
-                echo "<h1>" . $gamme['nom'] . "</h1>";
-                echo "<div class=\"container\">
-                <div class=\"row\">"; // Les gammes s'affiches en en-tete, il est dans un echo dissoncié afin de ne pas avoir les gammes a chaque article.
-
-                foreach (getArticlesByGamme($gamme['id']) as $article) {
-
-                        echo
-                        "<div class=\"d-inline-flex p-2\" style=\"width: 5%\"><div class=\"card\">
+                                echo
+                                "<div class=\"d-inline-flex p-2\" style=\"width: 5%\"><div class=\"card\">
                         <img class=\"m-2 rounded-1\" src=\"./Rscs/png/" . $article['image'] . "\">
-                <div class=\"card-body\">
+                        <div class=\"card-body\">
                         <h5 class=\"card-title\">" . $article['nom'] . "</h5>
                         <p class=\"card-text\">" . $article['description'] . "</p>
 
                         <form method=\"GET\" action=\"./produit.php\">
 
-                        <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-                        <input type=\"submit\" class=\"btn btn-dark mb-2\" value=\"Détails produit\">
+                                <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
+                                <input type=\"submit\" class=\"btn btn-dark mb-2\" value=\"Détails produit\">
                         </form>
 
                         <form method=\"GET\" action=\"./panier.php\">
@@ -61,8 +59,9 @@ include 'head.php';
                         <input type=\"submit\" class=\"btn btn-outline-danger\" value=\"Ajouter au panier\">
                         </form>
                 </div></div></div>";
-                }
-        } ?>
+                        }
+                } ?>
+        </main>
 </body>
 
 

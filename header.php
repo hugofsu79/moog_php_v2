@@ -29,7 +29,7 @@
                           </li>";
               } else {
                 echo "<li class=\"nav-item\">
-                            <a class=\"nav-link\" href=\"mon_comptex.php\">Mon compte</a>
+                            <a class=\"nav-link\" href=\"mon_compte.php\">Mon compte</a>
                           </li>
                           <li class=\"nav-item\">
                             <form action=\"index.php\" method=\"post\" class=\"nav-link\">

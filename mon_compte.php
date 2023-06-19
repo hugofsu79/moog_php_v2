@@ -2,72 +2,75 @@
 // inclure le fichier des fonctions pour pouvoir les appeler ici
 include 'function.php';
 
-//Initialiser la session et accéder à la superglobale $_SESSION (tableau associatif)
 session_start();
 
-
-
+// Pour initialiser le panier 
+createCart();
+// var_dump($_SESSION);
 
 //J'inclus le head avec les balises de base + la balise head(pour ne pas répeter le code qu'il contient)
 include 'head.php';
 ?>
 
+<?php
+include 'header.php';
+
+// Pour initialiser le panier 
+// createCart();
+// var_dump($_SESSION);
+if (isset($_POST['deconnection()'])) {
+    deconnection();
+}
+
+?>
+
 <body>
     <main>
+
         <?php
-        include 'header.php';
 
-        // Pour initialiser le panier 
-        // createCart();
-        // var_dump($_SESSION);
 
+        if (isset($_POST['articleToDisplay'])) {
+
+            $articleToDisplayId = $_POST['articleToDisplay'];
+            $articleToDisplay = getArticleFromId($articleToDisplayId);
+        }
+
+        if (isset($_POST['userModified'])) {
+            updateUser();
+        }
+
+        if (isset($_POST['addressModified'])) {
+            updateAddress();
+        }
+
+        if (isset($_POST['passwordModified'])) {
+            updatePassword();
+        }
 
         ?>
-        
+
+
         <h1>Mon compte</h1>
 
-        <div class="container text-center pb-5">
-            <div class="row align-items-start g-2">
-                <div class="col-3 text-center">
-                    <a href="./modifInfos.php"><button type="button" class="btn btn-light">
-                            <p class="fs-1 fw-bold mb-5">&#8505;<br></p>
-                            Modifier mes information
-                        </button></a>
-                </div>
+        <div href="container text-cente">
+            <div class="row align-items-startr p-5">
                 <div class="col">
-                    <a href="./lesCommandes.php"><button type="button" class="btn btn-light">
-                            <p class="fs-1 fw-bold mb-5">&#127980;<br></p>
-                            Voir mes commandes
-                        </button></a>
-                </div>
-                <div class="col">
-                    <a href="./change_Passeword.php"><button type="button" class="btn btn-light">
-                            <p class="fs-1 fw-bold mb-4">&#128274;<br></p>
-                            Modifier mon mot de passe<br>
-                        </button></a>
-                </div>
-                <div class="col">
-                    <a href="./modifAdresse.php"><button type=" button" class="btn btn-light">
-                            <p class="fs-1 fw-bold">&#127969;<br></p>
-                            Modifier mon adresse<br>
-                        </button></a>
+                    <div class="list-group text-center">
+                        <a type="button" class="list-group-item list-group-item-action w-50" href="./modifInfos.php">&#8505; Modifier mes information</a>
+                        <a type="button" class="list-group-item list-group-item-actio w-50" href="./commandes.php">&#127980; Voir mes commandes</a>
+                        <a type="button" class="list-group-item list-group-item-action w-50" href="./change_Password.php">&#128274; Modifier mon mot de passe</a>
+                        <a type="button" class="list-group-item list-group-item-action w-50" href="./modifAdresse.php">&#127969; Modifier mon adresse</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                The current link item
-            </a>
-            <a type="button" class="list-group-item list-group-item-action">A second link item</a>
-            <a type="button" class="list-group-item list-group-item-action">A third link item</a>
-            <a type="button" class="list-group-item list-group-item-action">A fourth link item</a>
-            <a class="list-group-item list-group-item-action disabled">A disabled link item</a>
-        </div>
-    </main>
-    <?php
-    include 'footer.php';
-    ?>
 
+        <?php
+        include 'footer.php';
+        ?>
+
+    </main>
 
 </body>
